@@ -10,8 +10,14 @@ public class CellFactory {
         } else if(cellType.equalsIgnoreCase("INACCESSIBLE")){
             return new InaccessibleCell();
 
-        } else if(cellType.equalsIgnoreCase("SAFE")){
-            return new SafeCell();
+        } else if(cellType.equalsIgnoreCase("BUSH")){
+            return new BushCell();
+
+        } else if(cellType.equalsIgnoreCase("CAVE")) {
+            return new CaveCell();
+
+        }else if(cellType.equalsIgnoreCase("KOULOU")) {
+            return new KoulouCell();
         }
 
         return null;
