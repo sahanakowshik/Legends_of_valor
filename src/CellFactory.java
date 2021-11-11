@@ -4,8 +4,8 @@ public class CellFactory {
         if(cellType == null){
             return null;
         }
-        if(cellType.equalsIgnoreCase("MARKET")){
-            return new MarketCell();
+        if(cellType.equalsIgnoreCase("NEXUS")){
+            return new NexusCell();
 
         } else if(cellType.equalsIgnoreCase("INACCESSIBLE")){
             return new InaccessibleCell();
@@ -18,6 +18,8 @@ public class CellFactory {
 
         }else if(cellType.equalsIgnoreCase("KOULOU")) {
             return new KoulouCell();
+        }else if(cellType.equalsIgnoreCase("PLAIN")) {
+            return new PlainCell();
         }
 
         return null;

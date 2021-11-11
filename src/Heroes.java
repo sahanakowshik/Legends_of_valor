@@ -22,6 +22,24 @@ public abstract class Heroes extends LegendsPlayer{
     private List<Spell> spells; // Holds spells bought by the hero
     private boolean isEquipped; // to check if the hero is equipped
     private int exp; // to check if the hero levels up
+    private int i; // Holds current row position
+    private int j; // Holds current column position
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
+    public void setJ(int j) {
+        this.j = j;
+    }
 
     public int getExp() {
         return exp;

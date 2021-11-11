@@ -1,7 +1,7 @@
-public class MarketCell extends Cell implements isAccessible {
+public class NexusCell extends Cell implements isAccessible {
     // Holds attributes to create a market cell
 
-    private String symbol = "\u001b[34m  M  \u001b[0m";
+    private String symbol = "\u001b[34m  N  \u001b[0m";
     @Override
     public String getSymbol() {
         return this.symbol;

@@ -10,13 +10,13 @@ public class Display {
             }
             System.out.println("==");
             for(int j=0;j<GameConstants.boardSize;j++) {
-                if(board.grid[i][j].getIsSet()){
-                    if(board.grid[i][j] instanceof isAccessible){
-                        System.out.print("||" + "\u001b[33m  " + board.grid[i][j].getPlayer().getSymbol() + "  \u001b[0m");
-                    }
-                }
-                else
-                    System.out.print("||" + board.grid[i][j].getSymbol());
+//                if(board.grid[i][j].getIsSet()){
+//                    if(board.grid[i][j] instanceof isAccessible){
+//                        System.out.print("||" + "\u001b[33m  " + board.grid[i][j].getHero().getSymbol() + "  \u001b[0m");
+//                    }
+//                }
+//                else
+                System.out.print("||" + board.grid[i][j].getSymbol());
             }
             System.out.println("||");
         }

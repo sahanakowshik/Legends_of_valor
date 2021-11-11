@@ -1,7 +1,18 @@
 public abstract class Cell{
     // Class to hold attributes of a single cell in the map
     private boolean isSet;
-    private LegendsPlayer player;
+    private Heroes hero;
+    private Monsters monster;
+
+    public Monsters getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monsters monster) {
+        this.monster = monster;
+    }
+
+//    protected String cell[][];
 
     public boolean getIsSet() {
         return isSet;
@@ -11,12 +22,12 @@ public abstract class Cell{
         isSet = set;
     }
 
-    public LegendsPlayer getPlayer() {
-        return player;
+    public Heroes getHero() {
+        return hero;
     }
 
-    public void setPlayer(LegendsPlayer player) {
-        this.player = player;
+    public void setHero(Heroes hero) {
+        this.hero = hero;
     }
 
     public abstract String getSymbol();

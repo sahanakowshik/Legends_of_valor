@@ -1,5 +1,5 @@
 public class BushCell extends Cell implements isAccessible{
-    private String symbol = "\u001b[34m  M  \u001b[0m";
+    private String symbol = "\u001b[34m  B  \u001b[0m";
     @Override
     public String getSymbol() {
         return this.symbol;
@@ -8,6 +8,7 @@ public class BushCell extends Cell implements isAccessible{
     @Override
     public String toString() {
         return "Bush";
+        
     }
 
     @Override
