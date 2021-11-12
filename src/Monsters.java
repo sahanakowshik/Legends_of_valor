@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class Monsters extends LegendsPlayer{
+public abstract class Monsters extends ValorPlayer{
     // Class to create monsters
     private String name;
     private int level;
@@ -8,6 +8,24 @@ public abstract class Monsters extends LegendsPlayer{
     private int defense;
     private int dodge_chance;
     private int hp;
+    private int i; // Holds current row position
+    private int j; // Holds current column position
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
+    public void setJ(int j) {
+        this.j = j;
+    }
 
     public int getHp() {
         return hp;

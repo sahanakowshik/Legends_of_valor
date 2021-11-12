@@ -109,7 +109,7 @@ public class Market implements MarketInterface{
 
 
 
-    public void buySell(LegendsPlayer player){
+    public void buySell(ValorPlayer player){
         // Implement buying and selling logic
         System.out.println("\u001B[44m You have entered the market \u001B[0m");
         for(Heroes hero: player.getHeroes()){

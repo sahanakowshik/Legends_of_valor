@@ -10,13 +10,24 @@ public class Display {
             }
             System.out.println("==");
             for(int j=0;j<GameConstants.boardSize;j++) {
-//                if(board.grid[i][j].getIsSet()){
-//                    if(board.grid[i][j] instanceof isAccessible){
-//                        System.out.print("||" + "\u001b[33m  " + board.grid[i][j].getHero().getSymbol() + "  \u001b[0m");
-//                    }
-//                }
-//                else
-                System.out.print("||" + board.grid[i][j].getSymbol());
+                if(board.grid[i][j].getIsHeroSet()){
+                    if(board.grid[i][j] instanceof isAccessible){
+                        System.out.print("||" + "\u001b[33m  " + board.grid[i][j].getHero().getSymbol() + "  \u001b[0m");
+                    }
+                }
+                else if(board.grid[i][j].getIsMonsterSet()){
+                    if(board.grid[i][j] instanceof isAccessible){
+                        System.out.print("||" + "\u001b[33m  " + board.grid[i][j].getMonster().getSymbol() + "  \u001b[0m");
+                    }
+                }
+                else
+                    try {
+    //                    System.out.println(board.grid[i][j].getName());
+                        System.out.print("||" + board.grid[i][j].getSymbol());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                        e.printStackTrace();
+                    }
             }
             System.out.println("||");
         }

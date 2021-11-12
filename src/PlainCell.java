@@ -1,7 +1,7 @@
 public class PlainCell extends Cell implements isAccessible {
     // Holds attributes to create a safe/common cell
 
-    private String symbol = "  p  ";
+    private String symbol = "  P  ";
     @Override
     public String getSymbol() {
         return this.symbol;
@@ -9,11 +9,11 @@ public class PlainCell extends Cell implements isAccessible {
 
     @Override
     public String toString() {
-        return "Safe";
+        return "Plain";
     }
 
     @Override
     public String getName() {
-        return "Safe";
+        return "Plain";
     }
 }

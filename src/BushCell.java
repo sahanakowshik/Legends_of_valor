@@ -8,7 +8,6 @@ public class BushCell extends Cell implements isAccessible{
     @Override
     public String toString() {
         return "Bush";
-        
     }
 
     @Override

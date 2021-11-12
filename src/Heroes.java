@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Heroes extends LegendsPlayer{
+public abstract class Heroes extends ValorPlayer{
     // Class to hold attributes of a hero
     private String name;
     private int mana;
@@ -24,6 +24,18 @@ public abstract class Heroes extends LegendsPlayer{
     private int exp; // to check if the hero levels up
     private int i; // Holds current row position
     private int j; // Holds current column position
+
+    @Override
+    public String getSymbol() {
+        return symbol;
+    }
+
+    @Override
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    private String symbol;
 
     public int getI() {
         return i;
