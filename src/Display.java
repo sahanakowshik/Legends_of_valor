@@ -15,23 +15,23 @@ public class Display {
             if (i != 0) {
                 System.out.println();
             }
-            String line = "";
+            StringBuilder line = new StringBuilder();
             for(int j=0;j<GameConstants.boardSize;j++){
                 if (j != 0) {
-                    line += "  ";
+                    line.append("  ");
                 }
                 if (board.grid[i][j] instanceof NexusCell) {
-                    line += nexus;
+                    line.append(nexus);
                 } else if (board.grid[i][j] instanceof InaccessibleCell) {
-                    line += inAccessible;
+                    line.append(inAccessible);
                 } else if (board.grid[i][j] instanceof PlainCell) {
-                    line += plain;
+                    line.append(plain);
                 } else if (board.grid[i][j] instanceof BushCell) {
-                    line += bush;
+                    line.append(bush);
                 } else if (board.grid[i][j] instanceof CaveCell) {
-                    line += cave;
+                    line.append(cave);
                 } else if (board.grid[i][j] instanceof KoulouCell) {
-                    line += koulou;
+                    line.append(koulou);
                 }
             }
             System.out.println(line);

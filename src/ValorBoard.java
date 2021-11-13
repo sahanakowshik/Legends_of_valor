@@ -45,27 +45,27 @@ public class ValorBoard extends Board{
         this.grid[GameConstants.boardSize-1][0].setHeroSet(true);
         this.grid[GameConstants.boardSize-1][3].setHero(player.getHeroes().get(1));
         player.getHeroes().get(1).setI(GameConstants.boardSize-1);
-        player.getHeroes().get(0).setJ(3);
+        player.getHeroes().get(1).setJ(3);
         this.grid[GameConstants.boardSize-1][3].setHeroSet(true);
         this.grid[GameConstants.boardSize-1][6].setHero(player.getHeroes().get(2));
         player.getHeroes().get(2).setI(GameConstants.boardSize-1);
-        player.getHeroes().get(0).setJ(6);
+        player.getHeroes().get(2).setJ(6);
         this.grid[GameConstants.boardSize-1][6].setHeroSet(true);
     }
 
     public void addMonster(ValorPlayer player){
-        this.grid[0][0].setMonster(player.getCurMonsters().get(0));
-        player.getCurMonsters().get(0).setI(GameConstants.boardSize-1);
-        player.getCurMonsters().get(0).setJ(0);
-        this.grid[0][0].setMonsterSet(true);
-        this.grid[0][3].setMonster(player.getCurMonsters().get(1));
-        player.getCurMonsters().get(1).setI(GameConstants.boardSize-1);
-        player.getCurMonsters().get(0).setJ(3);
-        this.grid[0][3].setMonsterSet(true);
-        this.grid[0][6].setMonster(player.getCurMonsters().get(2));
-        player.getCurMonsters().get(2).setI(GameConstants.boardSize-1);
-        player.getCurMonsters().get(0).setJ(6);
-        this.grid[0][6].setMonsterSet(true);
+        this.grid[0][1].setMonster(player.getCurMonsters().get(0));
+        player.getCurMonsters().get(0).setI(0);
+        player.getCurMonsters().get(0).setJ(1);
+        this.grid[0][1].setMonsterSet(true);
+        this.grid[0][4].setMonster(player.getCurMonsters().get(1));
+        player.getCurMonsters().get(1).setI(0);
+        player.getCurMonsters().get(1).setJ(4);
+        this.grid[0][4].setMonsterSet(true);
+        this.grid[0][7].setMonster(player.getCurMonsters().get(2));
+        player.getCurMonsters().get(2).setI(0);
+        player.getCurMonsters().get(2).setJ(7);
+        this.grid[0][7].setMonsterSet(true);
     }
 
     public boolean canMove(int i, int j){
@@ -102,7 +102,7 @@ public class ValorBoard extends Board{
         if(this.grid[i][j] instanceof isAccessible){
             this.grid[i][j].setMonster(monster);
             this.grid[i][j].setMonsterSet(true);
-            this.grid[monster.getI()][monster.getJ()].setHeroSet(false);
+            this.grid[monster.getI()][monster.getJ()].setMonsterSet(false);
 //            this.grid[this.i][this.j].setPlayer(null);
             monster.setI(i);
             monster.setJ(j);
