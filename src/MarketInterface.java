@@ -12,6 +12,6 @@ public interface MarketInterface {
     void displayIceSpells();
     void displayWeaponry();
     void createMarketList();
-    void buySell(ValorPlayer player);
+    void buySell(Heroes hero);
 
 }

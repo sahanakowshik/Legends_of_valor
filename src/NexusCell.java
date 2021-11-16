@@ -10,11 +10,11 @@ public class NexusCell extends Cell implements isAccessible {
 
     @Override
     public String toString() {
-        return "Market";
+        return "Nexus";
     }
 
     @Override
     public String getName() {
-        return "Market";
+        return "Nexus";
     }
 }

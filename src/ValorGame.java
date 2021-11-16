@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ValorGame extends RpgGame{
@@ -35,11 +36,15 @@ public class ValorGame extends RpgGame{
         board.addPlayer(player);
         board.addMonster(player);
         Display.displayBoard(board);
+        Market market = new Market();
 
         String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b"};
         String choice;
         while(true) {
             for (Heroes hero : player.getHeroes()) {
+                if(Objects.equals(board.grid[hero.getI()][hero.getJ()].getName(), "Nexus")){
+                    market.buySell(hero);
+                }
                 label:
                 do {
                     choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
@@ -96,7 +101,7 @@ public class ValorGame extends RpgGame{
                                     break label;
                                 }
                                 break;
-                            case "b":
+                            case "b": // Go back to nexus
                                 board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
                                 Display.displayBoard(board);
                                 Display.displayLegend(player.getSymbol());
