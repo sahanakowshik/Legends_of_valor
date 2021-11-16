@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class ValorGame extends RpgGame{
     ValorPlayer player;
+    
     @Override
     public String getName() {
         return null;
@@ -38,7 +39,7 @@ public class ValorGame extends RpgGame{
         Display.displayBoard(board);
         Market market = new Market();
 
-        String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b"};
+        String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b", "t"};
         String choice;
         while(true) {
             for (Heroes hero : player.getHeroes()) {
@@ -47,7 +48,7 @@ public class ValorGame extends RpgGame{
                 }
                 label:
                 do {
-                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nTeleport(T)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                     choice = choice.toLowerCase();
                     if (!Arrays.asList(data).contains(choice)) {
                         System.out.println("Please enter a valid choice....");
@@ -106,6 +107,40 @@ public class ValorGame extends RpgGame{
                                 Display.displayBoard(board);
                                 Display.displayLegend(player.getSymbol());
                                 System.out.println("\u001B[42m " + hero.getName() + "You have moved \u001b[0m");
+                                Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                break label;
+                            case "t":
+                                String laneOptions = "";
+                                String[] laneData = new String[2];
+                                if (hero.getJ() == 0 || hero.getJ() == 1) {
+                                    laneData[0] = "2";
+                                    laneData[1] = "3";
+                                    laneOptions = "2.Mid Lane or 3.Bot Lane?: ";
+                                }
+                                else if (hero.getJ() == 3 || hero.getJ() == 4) {
+                                    laneData[0] = "1";
+                                    laneData[1] = "3";
+                                    laneOptions = "1.Top Lane or 3.Bot Lane?: ";
+                                }
+                                else if (hero.getJ() == 6 || hero.getJ() == 7) {
+                                    laneData[0] = "1";
+                                    laneData[1] = "2";
+                                    laneOptions = "1.Top Lane or 2.Mid Lane?: ";
+                                }
+                                String laneChoice = GameFunctions.safeScanString(new Scanner(System.in), laneOptions);
+                                while (!Arrays.asList(laneData).contains(laneChoice)) {
+                                    System.out.println("Please enter a valid choice....");
+                                    laneChoice = GameFunctions.safeScanString(new Scanner(System.in), laneOptions);
+                                }
+
+                                switch(laneChoice) {
+                                    case "1":
+                                        board.moveHero(hero.getI(), 1, hero);
+                                    case "2":
+                                        board.moveHero(hero.getI(), 4, hero);
+                                    case "3":
+                                        board.moveHero(hero.getI(), 7, hero);
+                                }
                                 Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                 break label;
                             case "e": // Show inventory of all heroes
