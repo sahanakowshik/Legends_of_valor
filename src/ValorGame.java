@@ -4,10 +4,14 @@ import java.util.Scanner;
 
 public class ValorGame extends RpgGame{
     ValorPlayer player;
+    private Market market;
+    private int round;
+
     @Override
     public String getName() {
         return null;
     }
+
 
     @Override
     public void startGame() throws Exception {
@@ -36,14 +40,28 @@ public class ValorGame extends RpgGame{
         board.addPlayer(player);
         board.addMonster(player);
         Display.displayBoard(board);
-        Market market = new Market();
-
+        market = new Market();
+        market.createMarketList();
+        round = 0;
         String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b"};
         String choice;
         while(true) {
+            round++;
+
             for (Heroes hero : player.getHeroes()) {
+                hero.setHp((int) (hero.getHp() * 1.1));
+                hero.setMana((int) (hero.getMana() * 1.1));
                 if(Objects.equals(board.grid[hero.getI()][hero.getJ()].getName(), "Nexus")){
                     market.buySell(hero);
+                }
+                else if(Objects.equals(board.grid[hero.getI()][hero.getJ()].getName(), "Bush")){
+                    hero.setDexterity((int) (hero.getDexterity() * 1.1));
+                }
+                else if(Objects.equals(board.grid[hero.getI()][hero.getJ()].getName(), "Cave")){
+                    hero.setAgility((int) (hero.getAgility() * 1.1));
+                }
+                else if(Objects.equals(board.grid[hero.getI()][hero.getJ()].getName(), "Koulou")){
+                    hero.setStrength((int) (hero.getStrength() * 1.1));
                 }
                 label:
                 do {
@@ -135,6 +153,7 @@ public class ValorGame extends RpgGame{
                 if (!board.canMove(monster.getI() + 1, monster.getJ())) {
                     System.out.println("Inaccessible! Please enter a valid choice....");
                 } else {
+
                     board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
                     Display.displayBoard(board);
                     Display.displayLegend(player.getSymbol());
