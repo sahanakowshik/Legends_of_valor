@@ -36,13 +36,13 @@ public class ValorGame extends RpgGame{
         board.addMonster(player);
         Display.displayBoard(board);
 
-        String[] data = {"w", "a", "s", "d", "i", "e", "m", "q"};
+        String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b"};
         String choice;
         while(true) {
             for (Heroes hero : player.getHeroes()) {
                 label:
                 do {
-                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                     choice = choice.toLowerCase();
                     if (!Arrays.asList(data).contains(choice)) {
                         System.out.println("Please enter a valid choice....");
@@ -96,6 +96,13 @@ public class ValorGame extends RpgGame{
                                     break label;
                                 }
                                 break;
+                            case "b":
+                                board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
+                                Display.displayBoard(board);
+                                Display.displayLegend(player.getSymbol());
+                                System.out.println("\u001B[42m " + hero.getName() + "You have moved \u001b[0m");
+                                Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                break label;
                             case "e": // Show inventory of all heroes
                                 System.out.println("\u001B[36m " + hero.getName() + " Inventory \u001b[0m");
                                 hero.showInventory();
