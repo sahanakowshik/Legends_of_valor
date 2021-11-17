@@ -135,6 +135,9 @@ public class ValorGame extends RpgGame{
 
                                 switch(laneChoice) {
                                     case "1":
+                                        if(board.grid[hero.getI()][1].getIsHeroSet()) {
+                                            board.moveHero(hero.getI(), 1, hero);
+                                        }
                                         board.moveHero(hero.getI(), 1, hero);
                                     case "2":
                                         board.moveHero(hero.getI(), 4, hero);
