@@ -132,18 +132,128 @@ public class ValorGame extends RpgGame{
                                     System.out.println("Please enter a valid choice....");
                                     laneChoice = GameFunctions.safeScanString(new Scanner(System.in), laneOptions);
                                 }
-
+                                
+                                int rowCheck = hero.getI();
+                                int teleRow = -1;
+                                int teleCol = -1;
+                                int monsterLoc = -1;
+                                System.out.println(laneChoice);
                                 switch(laneChoice) {
                                     case "1":
-                                        if(board.grid[hero.getI()][1].getIsHeroSet()) {
-                                            board.moveHero(hero.getI(), 1, hero);
+                                        //Check if there are any monsters
+                                        for (int i = rowCheck; i < board.getBoardSize(); i++) {
+                                            if (board.grid[i][0].getIsMonsterSet() || board.grid[i][1].getIsMonsterSet()) {
+                                                monsterLoc = i;
+                                            }
+
+                                            if (monsterLoc != -1) {
+                                                break;
+                                            }
                                         }
-                                        board.moveHero(hero.getI(), 1, hero);
+
+                                        if (monsterLoc == -1) {
+                                            monsterLoc = rowCheck - 1;
+                                        }
+
+                                        //Place the teleporting hero in front of any monster but not where a hero is
+                                        for (int j = monsterLoc + 1; j < board.getBoardSize(); j++) {
+                                            if (!board.grid[j][0].getIsHeroSet()) {
+                                                teleRow = j;
+                                                teleCol = 0;
+                                                break;
+                                            }
+
+                                            if (!board.grid[j][1].getIsHeroSet()) {
+                                                teleRow = j;
+                                                teleCol = 1;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if (teleRow == -1 && teleCol == -1) {
+                                            System.out.println("You cannot teleport!");
+                                        }
+                                        else {
+                                            board.moveHero(teleRow, teleCol, hero);
+                                        }
                                     case "2":
-                                        board.moveHero(hero.getI(), 4, hero);
+                                        //Check if there are any monsters
+                                        for (int i = rowCheck; i < board.getBoardSize(); i++) {
+                                            if (board.grid[i][3].getIsMonsterSet() || board.grid[i][4].getIsMonsterSet()) {
+                                                monsterLoc = i;
+                                            }
+
+                                            if (monsterLoc != -1) {
+                                                break;
+                                            }
+                                        }
+
+                                        if (monsterLoc == -1) {
+                                            monsterLoc = rowCheck - 1;
+                                        }
+
+                                        //Place the teleporting hero in front of any monster but not where a hero is
+                                        for (int j = monsterLoc + 1; j < board.getBoardSize(); j++) {
+                                            if (!board.grid[j][3].getIsHeroSet()) {
+                                                teleRow = j;
+                                                teleCol = 3;
+                                                break;
+                                            }
+
+                                            if (!board.grid[j][4].getIsHeroSet()) {
+                                                teleRow = j;
+                                                teleCol = 4;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if (teleRow == -1 && teleCol == -1) {
+                                            System.out.println("You cannot teleport!");
+                                        }
+                                        else {
+                                            board.moveHero(teleRow, teleCol, hero);
+                                        }
                                     case "3":
-                                        board.moveHero(hero.getI(), 7, hero);
+                                        //Check if there are any monsters
+                                        for (int i = rowCheck; i < board.getBoardSize(); i++) {
+                                            if (board.grid[i][6].getIsMonsterSet() || board.grid[i][7].getIsMonsterSet()) {
+                                                monsterLoc = i;
+                                            }
+
+                                            if (monsterLoc != -1) {
+                                                break;
+                                            }
+                                        }
+
+                                        if (monsterLoc == -1) {
+                                            monsterLoc = rowCheck - 1;
+                                        }
+
+                                        //Place the teleporting hero in front of any monster but not where a hero is
+                                        for (int j = monsterLoc + 1; j < board.getBoardSize(); j++) {
+                                            if (!board.grid[j][6].getIsHeroSet()) {
+                                                teleRow = j;
+                                                teleCol = 6;
+                                                break;
+                                            }
+
+                                            if (!board.grid[j][7].getIsHeroSet()) {
+                                                teleRow = j;
+                                                teleCol = 7;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if (teleRow == -1 && teleCol == -1) {
+                                            System.out.println("You cannot teleport!");
+                                        }
+                                        else {
+                                            board.moveHero(teleRow, teleCol, hero);
+                                        }
                                 }
+                                Display.displayBoard(board);
+                                Display.displayLegend(player.getSymbol());
+                                System.out.println("\u001B[42m " + hero.getName() + "You have teleported \u001b[0m");
                                 Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                 break label;
                             case "e": // Show inventory of all heroes
