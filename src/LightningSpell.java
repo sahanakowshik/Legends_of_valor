@@ -27,7 +27,7 @@ public class LightningSpell extends Spell{
         lightningSpells = new ArrayList<>();
         for(String str: list){
             String[] words = str.split("\\s+");
-            Spell spell = new FireSpell();
+            Spell spell = new LightningSpell();
             spell.setId(Integer.parseInt(words[0]));
             spell.setName(words[1]);
             spell.setCost(Integer.parseInt(words[2]));

@@ -46,8 +46,10 @@ public class ValorGame extends RpgGame{
         String choice;
         while(true) {
             round++;
-
-            for (Heroes hero : player.getHeroes()) {
+            for(int i=0;i<player.getHeroes().size();i++){
+//            for (Heroes hero : player.getHeroes()) {
+                Heroes hero = player.getHeroes().get(i);
+                Monsters monster = player.getCurMonsters().get(i);
                 hero.setHp((int) (hero.getHp() * 1.1));
                 hero.setMana((int) (hero.getMana() * 1.1));
                 if(Objects.equals(board.grid[hero.getI()][hero.getJ()].getName(), "Nexus")){
@@ -80,12 +82,17 @@ public class ValorGame extends RpgGame{
                                 if (!board.canMove(hero.getI() - 1, hero.getJ())) {
                                     System.out.println("Inaccessible! Please enter a valid choice....");
                                 } else {
-                                    board.moveHero(hero.getI() - 1, hero.getJ(), hero);
-                                    Display.displayBoard(board);
-                                    Display.displayLegend(hero.getSymbol());
-                                    System.out.println("\u001B[42m " + hero.getName() + ", You have moved \u001b[0m");
-                                    Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
-                                    break label;
+                                    if(board.grid[hero.getI()][hero.getJ()].getIsMonsterSet() || board.grid[hero.getI()][(int) (hero.getJ() - Math.pow(-1, (hero.getJ()+1)%3))].getIsMonsterSet()){
+                                        System.out.println("Monster in sight, you cannot move ahead!!\nPlease enter a different option");
+                                    }
+                                    else {
+                                        board.moveHero(hero.getI() - 1, hero.getJ(), hero);
+                                        Display.displayBoard(board);
+                                        Display.displayLegend(hero.getSymbol());
+                                        System.out.println("\u001B[42m " + hero.getName() + ", You have moved \u001b[0m");
+                                        Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                        break label;
+                                    }
                                 }
                                 break;
                             case "s": // Move down
@@ -148,8 +155,25 @@ public class ValorGame extends RpgGame{
                             case "f":
                                 System.out.println("Fight begins!");
                                 Display.displayBoard(board);
+                                List<Monsters> nearMonsters = hero.getNearByMonsters(board);
+                                Random rand = new Random();
+                                int randInt = rand.nextInt(nearMonsters.size());
+                                Monsters curMonster = nearMonsters.get(randInt);
 //                                Monsters curMonster;
-//                                hero.fight(curMonster);
+                                int fchoice = hero.fight(curMonster, market);
+                                if(fchoice == 1)
+                                    return;
+                                System.out.println("Monsters info");
+                                Display.displayMonsters(player.getCurMonsters());
+                                if(curMonster.getHp() <= 0){
+                                    System.out.println(hero.getName() + " You have won the fight!");
+                                    board.moveMonster(0, monster.getJ(), monster);
+                                    Parser.parseMusic("mixkit-achievement-bell-600.wav");
+                                    curMonster.setHp(curMonster.getLevel() * 100);
+                                    hero.setStarting_money(hero.getStarting_money() + curMonster.getLevel() * 100);
+                                    hero.setStarting_exp(hero.getStarting_exp() + 2);
+                                    hero.setExp(hero.getExp() + 2);
+                                }
                                 break label;
                             case "q":
                                 // Quit the game
@@ -158,9 +182,9 @@ public class ValorGame extends RpgGame{
                         }
                     }
                 } while (true);
-            }
+//            }
 
-            for(Monsters monster: player.getCurMonsters()){
+//            for(Monsters monster: player.getCurMonsters()){
                 // check if needed to attack heroes before move down
                 if (monster.isHeroNearby(board)) {
                     // get all nearby heroes and choose a random one to attack
@@ -168,7 +192,15 @@ public class ValorGame extends RpgGame{
                     Random rand = new Random();
                     int randInt = rand.nextInt(nearHeroes.size());
                     Heroes curHero = nearHeroes.get(randInt);
-                    monster.attachHero(curHero);
+                    monster.attackHero(curHero);
+                    if(hero.getHp() <= 0){
+                        hero.setHp((hero.getLevel() * 100) / 2);
+                        board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
+                        Display.displayBoard(board);
+                        Display.displayLegend(player.getSymbol());
+                        System.out.println("\u001B[42m " + hero.getName() + "You have moved back to nexus \u001b[0m");
+                        Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                    }
                 } else {
                     if (!board.canMove(monster.getI() + 1, monster.getJ())) {
                         System.out.println("Inaccessible! Please enter a valid choice....");

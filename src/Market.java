@@ -111,7 +111,7 @@ public class Market implements MarketInterface{
 
     public void buySell(Heroes hero){
         // Implement buying and selling logic
-        System.out.println("\u001B[44m You have entered the market \u001B[0m");
+        System.out.println("\u001B[44m " + hero.getName() + ", You have entered the market \u001B[0m");
         int heroChoice = GameFunctions.safeScanIntWithLimit(new Scanner(System.in), hero.getName() + " would you like to enter the store\n1. Yes\n2. No\n", 1, 2);
         if(heroChoice == 2)
             return;

@@ -117,7 +117,7 @@ public abstract class Monsters extends ValorPlayer{
         return null;
     }
 
-    public void attachHero(Heroes hero) {
+    public void attackHero(Heroes hero) {
         int monDmg = (int) (this.getDamage() * 0.05); // Calculating damage dealt by monster
         if (GameFunctions.getRandomBoolean((float) (hero.getAgility() * 0.001))) { // Checking if hero dodged the attack
             System.out.println("\u001B[32m " + hero.getName() + " have dodged the attack! \u001b[0m");
