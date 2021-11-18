@@ -88,6 +88,54 @@ public abstract class Monsters extends ValorPlayer{
 
     public abstract String getType();
 
+    public boolean isHeroNearby(Board board) {
+        if (board.grid[i][j].getIsHeroSet() || board.grid[i+1][j].getIsHeroSet()) {
+            return true;
+        }
+
+        if (board.grid[i][j-1].getIsHeroSet() || board.grid[i+1][j-1].getIsHeroSet()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<Heroes> getNearByHeroes(Board board) {
+        if (this.isHeroNearby(board)) { // get all near heroes if there are
+            List<Heroes> nearHeroes = new ArrayList<>();
+            if (board.grid[i][j].getIsHeroSet()) {
+                nearHeroes.add(board.grid[i][j].getHero());
+            } else if (board.grid[i+1][j].getIsHeroSet()) {
+                nearHeroes.add(board.grid[i+1][j].getHero());
+            } else if (board.grid[i][j-1].getIsHeroSet()) {
+                nearHeroes.add(board.grid[i][j-1].getHero());
+            } else if (board.grid[i+1][j-1].getIsHeroSet()) {
+                nearHeroes.add(board.grid[i+1][j-1].getHero());
+            }
+            return nearHeroes;
+        }
+        return null;
+    }
+
+    public void attachHero(Heroes hero) {
+        int monDmg = (int) (this.getDamage() * 0.05); // Calculating damage dealt by monster
+        if (GameFunctions.getRandomBoolean((float) (hero.getAgility() * 0.001))) { // Checking if hero dodged the attack
+            System.out.println("\u001B[32m " + hero.getName() + " have dodged the attack! \u001b[0m");
+        } else {
+            if(hero.getArmories().size() == 0)
+                hero.setHp(Math.max((hero.getHp() - monDmg),0)); // Updating hp of hero without armory
+            else
+                hero.setHp(Math.max(Math.min((hero.getHp() + hero.getCurArmory().getDamage_reduction() - monDmg), hero.getHp()),0)); // Updating hp of hero without armory
+            System.out.println("\u001B[31m " + name + " has dealt " + monDmg + " damage to " + hero.getName() + "! \u001b[0m");
+            Parser.parseMusic("mixkit-quick-ninja-strike-2146.wav");
+            if (hero.getHp() <= 0) {
+                // Checking if monster won the round
+                System.out.println("\u001B[31m Monster won! \u001b[0m");
+                Parser.parseMusic("mixkit-8-bit-lose-2031.wav");
+            }
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

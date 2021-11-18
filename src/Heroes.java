@@ -102,6 +102,35 @@ public abstract class Heroes extends ValorPlayer{
         exp = 0;
     }
 
+    public boolean isMonsterNearby(Board board) {
+        if (board.grid[i][j].getIsMonsterSet() || board.grid[i-1][j].getIsMonsterSet()) {
+            return true;
+        }
+
+        if (board.grid[i][(int) (j - Math.pow(-1, (j+1)%3))].getIsMonsterSet() || board.grid[i-1][(int) (j - Math.pow(-1, (j+1)%3))].getIsMonsterSet()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<Monsters> getNearByMonsters(Board board) {
+        if (this.isMonsterNearby(board)) { // get all near heroes if there are
+            List<Monsters> nearMonsters = new ArrayList<>();
+            if (board.grid[i][j].getIsHeroSet()) {
+                nearMonsters.add(board.grid[i][j].getMonster());
+            } else if (board.grid[i-1][j].getIsHeroSet()) {
+                nearMonsters.add(board.grid[i+1][j].getMonster());
+            } else if (board.grid[i][j-1].getIsHeroSet()) {
+                nearMonsters.add(board.grid[i][j-1].getMonster());
+            } else if (board.grid[i+1][j-1].getIsHeroSet()) {
+                nearMonsters.add(board.grid[i+1][j-1].getMonster());
+            }
+            return nearMonsters;
+        }
+        return null;
+    }
+
 
     public void levelUp() {
         // Levels up the hero and updates the skills

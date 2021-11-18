@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class ValorGame extends RpgGame{
     ValorPlayer player;
@@ -43,7 +41,8 @@ public class ValorGame extends RpgGame{
         market = new Market();
         market.createMarketList();
         round = 0;
-        String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b"};
+        String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b", "f"};
+
         String choice;
         while(true) {
             round++;
@@ -65,7 +64,13 @@ public class ValorGame extends RpgGame{
                 }
                 label:
                 do {
-                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                    boolean isAttack = hero.isMonsterNearby(board);
+                    if (isAttack) {
+                        choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m " + hero.getName() + ", you run into a monster: \u001b[0m \nFight(F)\nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                    } else {
+                        choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                    }
+//                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                     choice = choice.toLowerCase();
                     if (!Arrays.asList(data).contains(choice)) {
                         System.out.println("Please enter a valid choice....");
@@ -140,6 +145,12 @@ public class ValorGame extends RpgGame{
                                 Display.displayBoard(board);
                                 Display.displayLegend(player.getSymbol());
                                 break;
+                            case "f":
+                                System.out.println("Fight begins!");
+                                Display.displayBoard(board);
+//                                Monsters curMonster;
+//                                hero.fight(curMonster);
+                                break label;
                             case "q":
                                 // Quit the game
                                 System.out.println("Thanks for playing");
@@ -150,18 +161,27 @@ public class ValorGame extends RpgGame{
             }
 
             for(Monsters monster: player.getCurMonsters()){
-                if (!board.canMove(monster.getI() + 1, monster.getJ())) {
-                    System.out.println("Inaccessible! Please enter a valid choice....");
+                // check if needed to attack heroes before move down
+                if (monster.isHeroNearby(board)) {
+                    // get all nearby heroes and choose a random one to attack
+                    List<Heroes> nearHeroes = monster.getNearByHeroes(board);
+                    Random rand = new Random();
+                    int randInt = rand.nextInt(nearHeroes.size());
+                    Heroes curHero = nearHeroes.get(randInt);
+                    monster.attachHero(curHero);
                 } else {
-
-                    board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
-                    Display.displayBoard(board);
-                    Display.displayLegend(player.getSymbol());
+                    if (!board.canMove(monster.getI() + 1, monster.getJ())) {
+                        System.out.println("Inaccessible! Please enter a valid choice....");
+                    } else {
+                        board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
+                        Display.displayBoard(board);
+                        Display.displayLegend(player.getSymbol());
 //                    System.out.println("\u001B[42m " + monster.getName() + "You have moved \u001b[0m");
-                    Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                        Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                    }
+                    System.out.println("\u001B[42m Monsters have moved \u001b[0m");
                 }
             }
-            System.out.println("\u001B[42m Monsters have moved \u001b[0m");
         }
     }
 }
