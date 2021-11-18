@@ -75,7 +75,7 @@ public class ValorGame extends RpgGame{
                     do {
                         boolean isAttack = hero.isMonsterNearby(board);
                         if (isAttack) {
-                            choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m " + hero.getName() + ", you run into a monster: \u001b[0m \nFight(F)\nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                            choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m " + hero.getSymbol() + ", you run into a monster: \u001b[0m \nFight(F)\nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                         } else {
                             choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is " + hero.getSymbol() + " turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                         }
@@ -96,7 +96,7 @@ public class ValorGame extends RpgGame{
                                             updateAttributes(board, hero);
                                             Display.displayBoard(board);
                                             Display.displayLegend(hero.getSymbol());
-                                            System.out.println("\u001B[42m " + hero.getName() + ", You have moved \u001b[0m");
+                                            System.out.println("\u001B[42m " + hero.getSymbol() + ", You have moved \u001b[0m");
                                             Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                             break label;
                                         }
@@ -110,7 +110,7 @@ public class ValorGame extends RpgGame{
                                         updateAttributes(board, hero);
                                         Display.displayBoard(board);
                                         Display.displayLegend(player.getSymbol());
-                                        System.out.println("\u001B[42m " + hero.getName() + "You have moved \u001b[0m");
+                                        System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                         break label;
                                     }
@@ -123,7 +123,7 @@ public class ValorGame extends RpgGame{
                                         updateAttributes(board, hero);
                                         Display.displayBoard(board);
                                         Display.displayLegend(player.getSymbol());
-                                        System.out.println("\u001B[42m " + hero.getName() + "You have moved \u001b[0m");
+                                        System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                         break label;
                                     }
@@ -136,7 +136,7 @@ public class ValorGame extends RpgGame{
                                         updateAttributes(board, hero);
                                         Display.displayBoard(board);
                                         Display.displayLegend(player.getSymbol());
-                                        System.out.println("\u001B[42m " + hero.getName() + "You have moved \u001b[0m");
+                                        System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                         break label;
                                     }
@@ -146,11 +146,11 @@ public class ValorGame extends RpgGame{
                                     updateAttributes(board, hero);
                                     Display.displayBoard(board);
                                     Display.displayLegend(player.getSymbol());
-                                    System.out.println("\u001B[42m " + hero.getName() + "You have moved \u001b[0m");
+                                    System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                     Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                     break label;
                                 case "e": // Show inventory of all heroes
-                                    System.out.println("\u001B[36m " + hero.getName() + " Inventory \u001b[0m");
+                                    System.out.println("\u001B[36m " + hero.getSymbol() + " Inventory \u001b[0m");
                                     hero.showInventory();
                                     System.out.println();
                                     break;
@@ -215,7 +215,7 @@ public class ValorGame extends RpgGame{
                             board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
                             Display.displayBoard(board);
                             Display.displayLegend(player.getSymbol());
-                            System.out.println("\u001B[42m " + hero.getName() + "You have moved back to nexus \u001b[0m");
+                            System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved back to nexus \u001b[0m");
                             Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                         }
                     } else {
