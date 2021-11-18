@@ -137,7 +137,7 @@ public class ValorGame extends RpgGame{
                                 int teleRow = -1;
                                 int teleCol = -1;
                                 int monsterLoc = -1;
-                                System.out.println(laneChoice);
+                                System.out.println("Lane Choice:" + laneChoice);
                                 switch(laneChoice) {
                                     case "1":
                                         //Check if there are any monsters
@@ -176,6 +176,7 @@ public class ValorGame extends RpgGame{
                                         else {
                                             board.moveHero(teleRow, teleCol, hero);
                                         }
+                                        break;
                                     case "2":
                                         //Check if there are any monsters
                                         for (int i = rowCheck; i < board.getBoardSize(); i++) {
@@ -213,6 +214,7 @@ public class ValorGame extends RpgGame{
                                         else {
                                             board.moveHero(teleRow, teleCol, hero);
                                         }
+                                        break;
                                     case "3":
                                         //Check if there are any monsters
                                         for (int i = rowCheck; i < board.getBoardSize(); i++) {
@@ -243,13 +245,14 @@ public class ValorGame extends RpgGame{
                                                 break;
                                             }
                                         }
-                                        
+
                                         if (teleRow == -1 && teleCol == -1) {
                                             System.out.println("You cannot teleport!");
                                         }
                                         else {
                                             board.moveHero(teleRow, teleCol, hero);
                                         }
+                                        break;
                                 }
                                 Display.displayBoard(board);
                                 Display.displayLegend(player.getSymbol());
