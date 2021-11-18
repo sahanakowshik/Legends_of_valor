@@ -86,7 +86,7 @@ public class ValorGame extends RpgGame{
                         } else {
                             switch (choice) {
                                 case "w": // Move up
-                                    if (!board.canMove(hero.getI() - 1, hero.getJ())) {
+                                    if (!board.canMove(hero.getI() - 1, hero.getJ()) || board.grid[hero.getI() - 1][hero.getJ()].getIsHeroSet() == true) {
                                         System.out.println("Inaccessible! Please enter a valid choice....");
                                     } else {
                                         if (board.grid[hero.getI()][hero.getJ()].getIsMonsterSet() || board.grid[hero.getI()][(int) (hero.getJ() - Math.pow(-1, (hero.getJ() + 1) % 3))].getIsMonsterSet()) {
@@ -103,7 +103,7 @@ public class ValorGame extends RpgGame{
                                     }
                                     break;
                                 case "s": // Move down
-                                    if (!board.canMove(hero.getI() + 1, hero.getJ())) {
+                                    if (!board.canMove(hero.getI() + 1, hero.getJ()) || board.grid[hero.getI() + 1][hero.getJ()].getIsHeroSet() == true) {
                                         System.out.println("Inaccessible! Please enter a valid choice....");
                                     } else {
                                         board.moveHero(hero.getI() + 1, hero.getJ(), hero);
@@ -116,7 +116,7 @@ public class ValorGame extends RpgGame{
                                     }
                                     break;
                                 case "a": // Move left
-                                    if (!board.canMove(hero.getI(), hero.getJ() - 1)) {
+                                    if (!board.canMove(hero.getI(), hero.getJ() - 1) || board.grid[hero.getI()][hero.getJ() - 1].getIsHeroSet() == true) {
                                         System.out.println("Inaccessible! Please enter a valid choice....");
                                     } else {
                                         board.moveHero(hero.getI(), hero.getJ() - 1, hero);
@@ -129,7 +129,7 @@ public class ValorGame extends RpgGame{
                                     }
                                     break;
                                 case "d": // Move right
-                                    if (!board.canMove(hero.getI(), hero.getJ() + 1)) {
+                                    if (!board.canMove(hero.getI(), hero.getJ() + 1) || board.grid[hero.getI()][hero.getJ() + 1].getIsHeroSet() == true) {
                                         System.out.println("Inaccessible! Please enter a valid choice....");
                                     } else {
                                         board.moveHero(hero.getI(), hero.getJ() + 1, hero);
