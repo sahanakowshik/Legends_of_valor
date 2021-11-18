@@ -13,6 +13,6 @@ public class KoulouCell extends Cell implements isAccessible{
 
     @Override
     public String getName() {
-        return "KOULOU";
+        return "Koulou";
     }
 }

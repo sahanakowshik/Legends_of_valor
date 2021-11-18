@@ -13,6 +13,6 @@ public class CaveCell extends Cell implements isAccessible{
 
     @Override
     public String getName() {
-        return "CAVE";
+        return "Cave";
     }
 }

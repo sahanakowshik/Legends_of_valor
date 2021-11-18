@@ -13,6 +13,6 @@ public class BushCell extends Cell implements isAccessible{
 
     @Override
     public String getName() {
-        return "BUSH";
+        return "Bush";
     }
 }
