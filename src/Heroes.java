@@ -104,11 +104,11 @@ public abstract class Heroes extends ValorPlayer{
     }
 
     public boolean isMonsterNearby(Board board) {
-        if (board.grid[i][j].getIsMonsterSet() || board.grid[i-1][j].getIsMonsterSet()) {
+        if (board.getGrid()[i][j].getIsMonsterSet() || board.getGrid()[i-1][j].getIsMonsterSet()) {
             return true;
         }
 
-        if (board.grid[i][(int) (j - Math.pow(-1, (j+1)%3))].getIsMonsterSet() || board.grid[i-1][(int) (j - Math.pow(-1, (j+1)%3))].getIsMonsterSet()) {
+        if (board.getGrid()[i][(int) (j - Math.pow(-1, (j+1)%3))].getIsMonsterSet() || board.getGrid()[i-1][(int) (j - Math.pow(-1, (j+1)%3))].getIsMonsterSet()) {
             return true;
         }
 
@@ -119,43 +119,43 @@ public abstract class Heroes extends ValorPlayer{
         if (this.isMonsterNearby(board)) { // get all near heroes if there are
             List<Monsters> nearMonsters = new ArrayList<>();
             try {
-                if (board.grid[i][j].getIsMonsterSet()) {
-                    nearMonsters.add(board.grid[i][j].getMonster());
+                if (board.getGrid()[i][j].getIsMonsterSet()) {
+                    nearMonsters.add(board.getGrid()[i][j].getMonster());
                 }
             } catch (Exception ignored) {
 
             }
             try {
-                if (board.grid[i - 1][j].getIsMonsterSet()) {
-                    nearMonsters.add(board.grid[i - 1][j].getMonster());
+                if (board.getGrid()[i - 1][j].getIsMonsterSet()) {
+                    nearMonsters.add(board.getGrid()[i - 1][j].getMonster());
                 }
             } catch (Exception ignored) {
 
             }
             try {
-                if (board.grid[i][j - 1].getIsMonsterSet()) {
-                    nearMonsters.add(board.grid[i][j - 1].getMonster());
+                if (board.getGrid()[i][j - 1].getIsMonsterSet()) {
+                    nearMonsters.add(board.getGrid()[i][j - 1].getMonster());
                 }
             } catch (Exception ignored) {
 
             }
             try {
-                if (board.grid[i + 1][j - 1].getIsMonsterSet()) {
-                    nearMonsters.add(board.grid[i + 1][j - 1].getMonster());
+                if (board.getGrid()[i + 1][j - 1].getIsMonsterSet()) {
+                    nearMonsters.add(board.getGrid()[i + 1][j - 1].getMonster());
                 }
             } catch (Exception ignored) {
 
             }
             try {
-                if (board.grid[i][j + 1].getIsMonsterSet()) {
-                    nearMonsters.add(board.grid[i][j + 1].getMonster());
+                if (board.getGrid()[i][j + 1].getIsMonsterSet()) {
+                    nearMonsters.add(board.getGrid()[i][j + 1].getMonster());
                 }
             } catch (Exception ignored) {
 
             }
             try {
-                if (board.grid[i - 1][j + 1].getIsMonsterSet()) {
-                    nearMonsters.add(board.grid[i - 1][j + 1].getMonster());
+                if (board.getGrid()[i - 1][j + 1].getIsMonsterSet()) {
+                    nearMonsters.add(board.getGrid()[i - 1][j + 1].getMonster());
                 }
             } catch (Exception ignored) {
 
@@ -370,25 +370,11 @@ public abstract class Heroes extends ValorPlayer{
                         dmg = (int) (this.getStrength() * 0.05);
                     }
                     curMonster.setHp(Math.max((curMonster.getHp() - dmg), 0)); // Reduces the health of the monster
+//                    market.getWeaponry().use(dmg, curMonster);
                     System.out.println("\u001B[33m" + this.getName() + " has dealt " + dmg + " damage! \u001b[0m");
                     Parser.parseMusic("mixkit-quick-ninja-strike-2146.wav");
-//                if (curMonster.getHp() <= 0) {
-//                    // Checking if player won the round
-//                    Display.displayMonsters(this.getCurMonsters());
-//                    System.out.println("\u001B[32m" + this.getName() + " Won! \u001b[0m");
-//                    Parser.parseMusic("mixkit-achievement-bell-600.wav");
-//                    level = Math.max(level, curMonster.getLevel());
-//                    heroFlag = 1;
-//                    curMonster.setHp(curMonster.getLevel() * 100);
-//                    this.getCurMonsters().remove(curMonster);
-//                    if(this.getCurMonsters().size() == 0)
-//                        break;
-//                    monIndex = (monIndex) % this.getCurMonsters().size();
-//                    continue;
-//                }
                 }
                 break;
-//            monIndex = (monIndex+1) % this.getCurMonsters().size();
             } else if (fchoice == 2) {
                 // Cast a spell
                 if (this.getSpells().size() == 0) {
@@ -416,24 +402,9 @@ public abstract class Heroes extends ValorPlayer{
                             market.getLightningSpell().use(curMonster, this, i, id, market); // Calls the default use method from the isCastable interface
                             Parser.parseMusic("mixkit-light-spell-873.wav");
                         }
-//                    if (curMonster.getHp() <= 0) {
-//                        // Checking if player won the round
-//                        Display.displayMonsters(this.getCurMonsters());
-//                        System.out.println("\u001B[32m" + this.getName() + " Won! \u001b[0m");
-//                        Parser.parseMusic("mixkit-achievement-bell-600.wav");
-//                        level = Math.max(level, curMonster.getLevel());
-//                        heroFlag = 1;
-//                        curMonster.setHp(curMonster.getLevel() * 100);
-//                        this.getCurMonsters().remove(curMonster);
-//                        if(this.getCurMonsters().size() == 0)
-//                            break;
-//                        monIndex = (monIndex) % this.getCurMonsters().size();
-//                        continue;
-//                    }
                     }
                 }
                 break;
-//            monIndex = (monIndex+1) % this.getCurMonsters().size();
             } else if (fchoice == 3) {
                 // Use a potion
                 if (this.getPotions().size() == 0) {
@@ -448,7 +419,6 @@ public abstract class Heroes extends ValorPlayer{
                         return 1;
                     } else {
                         market.getPotion().use(this, id); // Calls the default use method from the isDrinkable interface
-//                    monIndex = (monIndex+1) % this.getCurMonsters().size();
                     }
                 }
                 break;

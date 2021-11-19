@@ -118,4 +118,12 @@ public class Armory extends MarketItems implements isUsable, isBuyableSellable{
         return list;
     }
 
+    public void buy(Market market, Heroes hero, int id){
+        Armory item = market.getArmory().armories.get(id);
+        item.setEquip("Yes");
+        hero.getArmories().add(item);
+        hero.setIsEquipped(true);
+        hero.setCurArmory(item);
+    }
+
 }

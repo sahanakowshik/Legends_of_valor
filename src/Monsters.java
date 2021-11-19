@@ -89,11 +89,11 @@ public abstract class Monsters extends ValorPlayer{
     public abstract String getType();
 
     public boolean isHeroNearby(Board board) {
-        if (board.grid[i][j].getIsHeroSet() || board.grid[i+1][j].getIsHeroSet()) {
+        if (board.getGrid()[i][j].getIsHeroSet() || board.getGrid()[i+1][j].getIsHeroSet()) {
             return true;
         }
 
-        if (board.grid[i][j-1].getIsHeroSet() || board.grid[i+1][j-1].getIsHeroSet()) {
+        if (board.getGrid()[i][j-1].getIsHeroSet() || board.getGrid()[i+1][j-1].getIsHeroSet()) {
             return true;
         }
 
@@ -103,14 +103,14 @@ public abstract class Monsters extends ValorPlayer{
     public List<Heroes> getNearByHeroes(Board board) {
         if (this.isHeroNearby(board)) { // get all near heroes if there are
             List<Heroes> nearHeroes = new ArrayList<>();
-            if (board.grid[i][j].getIsHeroSet()) {
-                nearHeroes.add(board.grid[i][j].getHero());
-            } else if (board.grid[i+1][j].getIsHeroSet()) {
-                nearHeroes.add(board.grid[i+1][j].getHero());
-            } else if (board.grid[i][j-1].getIsHeroSet()) {
-                nearHeroes.add(board.grid[i][j-1].getHero());
-            } else if (board.grid[i+1][j-1].getIsHeroSet()) {
-                nearHeroes.add(board.grid[i+1][j-1].getHero());
+            if (board.getGrid()[i][j].getIsHeroSet()) {
+                nearHeroes.add(board.getGrid()[i][j].getHero());
+            } else if (board.getGrid()[i+1][j].getIsHeroSet()) {
+                nearHeroes.add(board.getGrid()[i+1][j].getHero());
+            } else if (board.getGrid()[i][j-1].getIsHeroSet()) {
+                nearHeroes.add(board.getGrid()[i][j-1].getHero());
+            } else if (board.getGrid()[i+1][j-1].getIsHeroSet()) {
+                nearHeroes.add(board.getGrid()[i+1][j-1].getHero());
             }
             return nearHeroes;
         }

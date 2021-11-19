@@ -20,17 +20,17 @@ public class Display {
                 if (j != 0) {
                     line.append("  ");
                 }
-                if (board.grid[i][j] instanceof NexusCell) {
+                if (board.getGrid()[i][j] instanceof NexusCell) {
                     line.append(nexus);
-                } else if (board.grid[i][j] instanceof InaccessibleCell) {
+                } else if (board.getGrid()[i][j] instanceof InaccessibleCell) {
                     line.append(inAccessible);
-                } else if (board.grid[i][j] instanceof PlainCell) {
+                } else if (board.getGrid()[i][j] instanceof PlainCell) {
                     line.append(plain);
-                } else if (board.grid[i][j] instanceof BushCell) {
+                } else if (board.getGrid()[i][j] instanceof BushCell) {
                     line.append(bush);
-                } else if (board.grid[i][j] instanceof CaveCell) {
+                } else if (board.getGrid()[i][j] instanceof CaveCell) {
                     line.append(cave);
-                } else if (board.grid[i][j] instanceof KoulouCell) {
+                } else if (board.getGrid()[i][j] instanceof KoulouCell) {
                     line.append(koulou);
                 }
             }
@@ -42,29 +42,29 @@ public class Display {
                 if (j != 0) {
                     System.out.print("  ");
                 }
-                if(board.grid[i][j].getIsHeroSet()){
-                    if(board.grid[i][j] instanceof isAccessible){
+                if(board.getGrid()[i][j].getIsHeroSet()){
+                    if(board.getGrid()[i][j] instanceof isAccessible){
                         // check if monster at the same cell
-                        if (!board.grid[i][j].getIsMonsterSet()) {
-                            roleContent += board.grid[i][j].getHero().getSymbol();
+                        if (!board.getGrid()[i][j].getIsMonsterSet()) {
+                            roleContent += board.getGrid()[i][j].getHero().getSymbol();
                             roleContent += "   ";
                         } else {
-                            roleContent += board.grid[i][j].getHero().getSymbol();
+                            roleContent += board.getGrid()[i][j].getHero().getSymbol();
                             roleContent += " ";
-                            roleContent += board.grid[i][j].getMonster().getSymbol();
+                            roleContent += board.getGrid()[i][j].getMonster().getSymbol();
                         }
                         System.out.print("|" + "\u001b[33m " + roleContent + " \u001b[0m" + "|");
                     }
                 }
-                else if(board.grid[i][j].getIsMonsterSet()){
-                    if(board.grid[i][j] instanceof isAccessible){
+                else if(board.getGrid()[i][j].getIsMonsterSet()){
+                    if(board.getGrid()[i][j] instanceof isAccessible){
 
-                        System.out.print("|" + "\u001b[33m    " + board.grid[i][j].getMonster().getSymbol() + " \u001b[0m" + "|");
+                        System.out.print("|" + "\u001b[33m    " + board.getGrid()[i][j].getMonster().getSymbol() + " \u001b[0m" + "|");
                     }
                 }
                 else
                     try {
-                        System.out.print("|" + board.grid[i][j].getSymbol() + "|");
+                        System.out.print("|" + board.getGrid()[i][j].getSymbol() + "|");
                     } catch (Exception e) {
                         System.out.println(e);
                         e.printStackTrace();

@@ -128,4 +128,14 @@ public class Weaponry extends MarketItems implements isBuyableSellable, isUsable
         }
         return list;
     }
+
+    @Override
+    public void buy(Market market, Heroes hero, int id) {
+        Weaponry item = market.getWeaponry().weapons.get(id);
+        item.setEquip("Yes");
+        hero.getWeapons().add(item);
+        hero.setIsEquipped(true);
+        hero.setCurWeapon(item);
+    }
+
 }

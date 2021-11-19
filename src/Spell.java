@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -70,6 +71,15 @@ public abstract class Spell extends MarketItems implements isCastable, isBuyable
 
     public void setMana_cost(int mana_cost) {
         this.mana_cost = mana_cost;
+    }
+
+    public void createSpell(Spell spell, String[] words){
+        spell.setId(Integer.parseInt(words[0]));
+        spell.setName(words[1]);
+        spell.setCost(Integer.parseInt(words[2]));
+        spell.setReq_level(Integer.parseInt(words[3]));
+        spell.setDamage(Integer.parseInt(words[4]));
+        spell.setMana_cost(Integer.parseInt(words[5]));
     }
 
     public abstract String getType();

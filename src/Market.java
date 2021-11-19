@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class Market implements MarketInterface{
     // Class to create an instance of the market
     // Implements facade pattern to get items from inventory
-    private MarketItems armory;
-    private MarketItems weaponry;
+    private Armory armory;
+    private Weaponry weaponry;
     private Potions potion;
     private Spell fireSpell;
     private Spell iceSpell;
@@ -19,11 +19,11 @@ public class Market implements MarketInterface{
         lightningSpell = new LightningSpell();
     }
 
-    public MarketItems getArmory() {
+    public Armory getArmory() {
         return armory;
     }
 
-    public MarketItems getWeaponry() {
+    public Weaponry getWeaponry() {
         return weaponry;
     }
 
@@ -143,11 +143,12 @@ public class Market implements MarketInterface{
                                             for(int i=0;i<hero.getArmories().size();i++){
                                                 hero.getArmories().get(i).setEquip("No");
                                             }
-                                            Armory item = this.getArmory().armories.get(id);
-                                            item.setEquip("Yes");
-                                            hero.getArmories().add(item);
-                                            hero.setIsEquipped(true);
-                                            hero.setCurArmory(item);
+                                            this.getArmory().buy(this, hero, id);
+//                                            Armory item = this.getArmory().armories.get(id);
+//                                            item.setEquip("Yes");
+//                                            hero.getArmories().add(item);
+//                                            hero.setIsEquipped(true);
+//                                            hero.setCurArmory(item);
                                         }
                                         else{
                                             hero.getArmories().add(this.getArmory().armories.get(id));
@@ -185,11 +186,12 @@ public class Market implements MarketInterface{
                                             for(Weaponry item: hero.getWeapons()){
                                                 item.setEquip("No");
                                             }
-                                            Weaponry item = this.getWeaponry().weapons.get(id);
-                                            item.setEquip("Yes");
-                                            hero.getWeapons().add(item);
-                                            hero.setIsEquipped(true);
-                                            hero.setCurWeapon(item);
+                                            this.getWeaponry().buy(this, hero, id);
+//                                            Weaponry item = this.getWeaponry().weapons.get(id);
+//                                            item.setEquip("Yes");
+//                                            hero.getWeapons().add(item);
+//                                            hero.setIsEquipped(true);
+//                                            hero.setCurWeapon(item);
                                         }
                                         else{
                                             hero.getWeapons().add(this.getWeaponry().weapons.get(id));
@@ -221,7 +223,8 @@ public class Market implements MarketInterface{
                                         System.out.println("You already own this item");
                                     }
                                     else {
-                                        hero.getPotions().add(this.getPotion().potions.get(id));
+                                        this.getPotion().buy(this, hero, id);
+//                                        hero.getPotions().add(this.getPotion().potions.get(id));
                                         hero.setStarting_money(hero.getStarting_money() - this.getPotion().potions.get(id).getCost());
                                         break;
                                     }
@@ -253,7 +256,8 @@ public class Market implements MarketInterface{
                                             System.out.println("You already own this item");
                                         }
                                         else {
-                                            hero.getSpells().add(this.getFireSpell().fireSpells.get(id));
+                                            this.getFireSpell().buy(this, hero, id);
+//                                            hero.getSpells().add(this.getFireSpell().fireSpells.get(id));
                                             hero.setStarting_money(hero.getStarting_money() - this.getFireSpell().fireSpells.get(id).getCost());
                                             break;
                                         }
@@ -279,7 +283,8 @@ public class Market implements MarketInterface{
                                             System.out.println("You already own this item");
                                         }
                                         else {
-                                            hero.getSpells().add(this.getIceSpell().iceSpells.get(id));
+                                            this.getIceSpell().buy(this, hero, id);
+//                                            hero.getSpells().add(this.getIceSpell().iceSpells.get(id));
                                             hero.setStarting_money(hero.getStarting_money() - this.getIceSpell().iceSpells.get(id).getCost());
                                             break;
                                         }
@@ -305,7 +310,8 @@ public class Market implements MarketInterface{
                                             System.out.println("You already own this item");
                                         }
                                         else {
-                                            hero.getSpells().add(this.getLightningSpell().lightningSpells.get(id));
+                                            this.getLightningSpell().buy(this, hero, id);
+//                                            hero.getSpells().add(this.getLightningSpell().lightningSpells.get(id));
                                             hero.setStarting_money(hero.getStarting_money() - this.getLightningSpell().lightningSpells.get(id).getCost());
                                             break;
                                         }

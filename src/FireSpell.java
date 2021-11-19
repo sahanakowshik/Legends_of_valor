@@ -28,12 +28,7 @@ public class FireSpell extends Spell{
         for(String str: list){
             String[] words = str.split("\\s+");
             Spell spell = new FireSpell();
-            spell.setId(Integer.parseInt(words[0]));
-            spell.setName(words[1]);
-            spell.setCost(Integer.parseInt(words[2]));
-            spell.setReq_level(Integer.parseInt(words[3]));
-            spell.setDamage(Integer.parseInt(words[4]));
-            spell.setMana_cost(Integer.parseInt(words[5]));
+            this.createSpell(spell, words);
             fireSpells.add(spell);
         }
     }
@@ -47,5 +42,10 @@ public class FireSpell extends Spell{
             list.add(str);
         }
         return list;
+    }
+
+    @Override
+    public void buy(Market market, Heroes hero, int id) {
+        hero.getSpells().add(market.getFireSpell().fireSpells.get(id));
     }
 }

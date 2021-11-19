@@ -103,4 +103,9 @@ public class Potions extends MarketItems implements isBuyableSellable, isDrinkab
         }
         return list;
     }
+
+    @Override
+    public void buy(Market market, Heroes hero, int id) {
+        hero.getPotions().add(market.getPotion().potions.get(id));
+    }
 }

@@ -49,13 +49,18 @@ public class ValorPlayer extends Player{
         createMonster(ls, "Spirit");
     }
 
+    public Monsters getMonster(Heroes hero){
+        Random rand = new Random();
+        Monsters monster = monsters.get(hero.getLevel()).get(rand.nextInt(monsters.get(hero.getLevel()).size()));
+        return monster;
+    }
+
     public void getMonsters(){
         // Returns random monsters of same level as the hero from the list of monsters
-        Random rand = new Random();
         curMonsters = new ArrayList<>();
         for(Heroes hero: this.getHeroes()){
             while (true) { // Avoiding repetition of monsters
-                Monsters monster = monsters.get(hero.getLevel()).get(rand.nextInt(monsters.get(hero.getLevel()).size()));
+                Monsters monster = getMonster(hero);
                 if (curMonsters.contains(monster)) {
                     continue;
                 }
