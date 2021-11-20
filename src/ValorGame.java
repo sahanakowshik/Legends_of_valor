@@ -185,8 +185,6 @@ public class ValorGame extends RpgGame{
             player = new ValorPlayer();
             player.setName(GameFunctions.safeScanString(new Scanner(System.in), "Please enter your name:\n"));
             player.setnHero(3);
-//        player.setnHero(GameFunctions.safeScanIntWithLimit(new Scanner(System.in), "Please enter the number of heroes (1-3):\n", 1, 3));
-//        player.setSymbol(GameFunctions.safeScanString(new Scanner(System.in), "Please enter your symbol:\n"));
 
             player.setHeroes();
             player.addHeroes();
@@ -194,7 +192,6 @@ public class ValorGame extends RpgGame{
             player.getHeroes().get(1).setSymbol("H2");
             player.getHeroes().get(2).setSymbol("H3");
 
-            // Add here
             while (true) {
                 player.setnMonster(3);
                 player.createMonsters();
@@ -203,8 +200,6 @@ public class ValorGame extends RpgGame{
                 player.getCurMonsters().get(1).setSymbol("M2");
                 player.getCurMonsters().get(2).setSymbol("M3");
 
-//            // Add here
-//            while (true) {
                 ValorBoard board = new ValorBoard();
                 board.createBoard(); // Creates a map
                 board.addPlayer(player);
@@ -217,7 +212,6 @@ public class ValorGame extends RpgGame{
                 String choice;
                 while (true) {
                     for (int i = 0; i < player.getHeroes().size(); i++) {
-//            for (Heroes hero : player.getHeroes()) {
                         Heroes hero = player.getHeroes().get(i);
                         Monsters monster = player.getCurMonsters().get(i);
                         hero.setHp((int) (hero.getHp() * 1.1));
@@ -225,6 +219,7 @@ public class ValorGame extends RpgGame{
                         if (Objects.equals(board.getGrid()[hero.getI()][hero.getJ()].getName(), "Nexus")) {
                             market.buySell(hero);
                         }
+                        int flag = 0;
 
                         label:
                         do {
@@ -234,7 +229,6 @@ public class ValorGame extends RpgGame{
                             } else {
                                 choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is " + hero.getSymbol() + " turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nTeleport(T)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                             }
-//                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
                             choice = choice.toLowerCase();
                             if (!Arrays.asList(data).contains(choice)) {
                                 System.out.println("Please enter a valid choice....");
@@ -336,7 +330,6 @@ public class ValorGame extends RpgGame{
                                             Random rand = new Random();
                                             int randInt = rand.nextInt(nearMonsters.size());
                                             Monsters curMonster = nearMonsters.get(randInt);
-//                                Monsters curMonster;
                                             int fchoice = hero.fight(curMonster, market);
                                             if (fchoice == 1)
                                                 return;
@@ -346,6 +339,7 @@ public class ValorGame extends RpgGame{
                                             if (curMonster.getHp() <= 0) {
                                                 System.out.println("\u001B[32m " + hero.getSymbol() + " You have won the fight! \u001B[0m");
                                                 board.moveMonster(0, curMonster.getJ(), curMonster);
+                                                flag = 1;
                                                 Parser.parseMusic("mixkit-achievement-bell-600.wav");
                                                 curMonster.setHp(curMonster.getLevel() * 100);
                                                 hero.setStarting_money(hero.getStarting_money() + curMonster.getLevel() * 100);
@@ -381,9 +375,9 @@ public class ValorGame extends RpgGame{
                         } while (true);
                         if (newGameFlag == 1 || newGameFlag == 2)
                             break;
-//            }
+                        if(flag == 1)
+                            continue;
 
-//            for(Monsters monster: player.getCurMonsters()){
                         // check if needed to attack heroes before move down
                         if (monster.isHeroNearby(board)) {
                             // get all nearby heroes and choose a random one to attack
@@ -407,7 +401,6 @@ public class ValorGame extends RpgGame{
                                 board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
                                 Display.displayBoard(board);
                                 Display.displayLegend(player.getSymbol());
-//                    System.out.println("\u001B[42m " + monster.getName() + "You have moved \u001b[0m");
                                 Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                             }
                             System.out.println("\u001B[42m " + monster.getSymbol() + ", you have moved \u001b[0m");
