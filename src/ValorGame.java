@@ -173,7 +173,7 @@ public class ValorGame extends RpgGame{
         }
         Display.displayBoard(board);
         Display.displayLegend(player.getSymbol());
-        System.out.println("\u001B[42m " + hero.getName() + "You have teleported \u001b[0m");
+        System.out.println("\u001B[42m " + hero.getSymbol() + "You have teleported \u001b[0m");
         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
     }
 
@@ -194,225 +194,243 @@ public class ValorGame extends RpgGame{
             player.getHeroes().get(1).setSymbol("H2");
             player.getHeroes().get(2).setSymbol("H3");
 
-            player.setnMonster(3);
-            player.createMonsters();
-            player.getMonsters();
-            player.getCurMonsters().get(0).setSymbol("M1");
-            player.getCurMonsters().get(1).setSymbol("M2");
-            player.getCurMonsters().get(2).setSymbol("M3");
-
-
-            ValorBoard board = new ValorBoard();
-            board.createBoard(); // Creates a map
-            board.addPlayer(player);
-            board.addMonster(player);
-            Display.displayBoard(board);
-            market = new Market();
-            market.createMarketList();
-            String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b", "f", "t"};
-
-            String choice;
+            // Add here
             while (true) {
-                for (int i = 0; i < player.getHeroes().size(); i++) {
-//            for (Heroes hero : player.getHeroes()) {
-                    Heroes hero = player.getHeroes().get(i);
-                    Monsters monster = player.getCurMonsters().get(i);
-                    hero.setHp((int) (hero.getHp() * 1.1));
-                    hero.setMana((int) (hero.getMana() * 1.1));
-                    if (Objects.equals(board.getGrid()[hero.getI()][hero.getJ()].getName(), "Nexus")) {
-                        market.buySell(hero);
-                    }
+                player.setnMonster(3);
+                player.createMonsters();
+                player.getMonsters();
+                player.getCurMonsters().get(0).setSymbol("M1");
+                player.getCurMonsters().get(1).setSymbol("M2");
+                player.getCurMonsters().get(2).setSymbol("M3");
 
-                    label:
-                    do {
-                        boolean isAttack = hero.isMonsterNearby(board);
-                        if (isAttack) {
-                            choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[31m " + hero.getSymbol() + ", you have run into a monster: \u001b[0m \nFight(F)\nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
-                        } else {
-                            choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is " + hero.getSymbol() + " turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nTeleport(T)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+//            // Add here
+//            while (true) {
+                ValorBoard board = new ValorBoard();
+                board.createBoard(); // Creates a map
+                board.addPlayer(player);
+                board.addMonster(player);
+                Display.displayBoard(board);
+                market = new Market();
+                market.createMarketList();
+                String[] data = {"w", "a", "s", "d", "i", "e", "m", "q", "b", "f", "t"};
+
+                String choice;
+                while (true) {
+                    for (int i = 0; i < player.getHeroes().size(); i++) {
+//            for (Heroes hero : player.getHeroes()) {
+                        Heroes hero = player.getHeroes().get(i);
+                        Monsters monster = player.getCurMonsters().get(i);
+                        hero.setHp((int) (hero.getHp() * 1.1));
+                        hero.setMana((int) (hero.getMana() * 1.1));
+                        if (Objects.equals(board.getGrid()[hero.getI()][hero.getJ()].getName(), "Nexus")) {
+                            market.buySell(hero);
                         }
+
+                        label:
+                        do {
+                            boolean isAttack = hero.isMonsterNearby(board);
+                            if (isAttack) {
+                                choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[31m " + hero.getSymbol() + ", you have run into a monster: \u001b[0m \nFight(F)\nMove(W/A/S/D)\nBackToNexus(B)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                            } else {
+                                choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is " + hero.getSymbol() + " turn to move: \u001b[0m \nMove(W/A/S/D)\nBackToNexus(B)\nTeleport(T)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
+                            }
 //                    choice = GameFunctions.safeScanString(new Scanner(System.in), "\u001B[32m It is the heroes turn to move: \u001b[0m \nMove(W/A/S/D)\nCheck player Info(I)\nCheck weapons Inventory (E)\nShow map (M)\nQuit (Q)\n");
-                        choice = choice.toLowerCase();
-                        if (!Arrays.asList(data).contains(choice)) {
-                            System.out.println("Please enter a valid choice....");
-                        } else {
-                            switch (choice) {
-                                case "w": // Move up
-                                    if (!board.canMove(hero.getI() - 1, hero.getJ()) || board.getGrid()[hero.getI() - 1][hero.getJ()].getIsHeroSet() == true) {
-                                        System.out.println("Inaccessible! Please enter a valid choice....");
-                                    } else {
-                                        if (board.getGrid()[hero.getI()][hero.getJ()].getIsMonsterSet() || board.getGrid()[hero.getI()][(int) (hero.getJ() - Math.pow(-1, (hero.getJ() + 1) % 3))].getIsMonsterSet()) {
-                                            System.out.println("\u001B[31m Monster in sight, you cannot move ahead!! Please enter a different option \u001B[0m");
+                            choice = choice.toLowerCase();
+                            if (!Arrays.asList(data).contains(choice)) {
+                                System.out.println("Please enter a valid choice....");
+                            } else {
+                                switch (choice) {
+                                    case "w": // Move up
+                                        if (!board.canMove(hero.getI() - 1, hero.getJ()) || board.getGrid()[hero.getI() - 1][hero.getJ()].getIsHeroSet() == true) {
+                                            System.out.println("Inaccessible! Please enter a valid choice....");
                                         } else {
-                                            board.moveHero(hero.getI() - 1, hero.getJ(), hero);
+                                            if (board.getGrid()[hero.getI()][hero.getJ()].getIsMonsterSet() || board.getGrid()[hero.getI()][(int) (hero.getJ() - Math.pow(-1, (hero.getJ() + 1) % 3))].getIsMonsterSet()) {
+                                                System.out.println("\u001B[31m Monster in sight, you cannot move ahead!! Please enter a different option \u001B[0m");
+                                            } else {
+                                                board.moveHero(hero.getI() - 1, hero.getJ(), hero);
+                                                if (hero.getI() == 0) {
+                                                    System.out.println("\u001B[32m Heroes won the game \u001B[0m");
+                                                    Parser.parseMusic("mixkit-ethereal-fairy-win-sound-2019.wav");
+                                                    newGameFlag = GameFunctions.safeScanIntWithLimit(new Scanner(System.in), "Do you want to play another game?\n1. Yes\n2. No\n", 1, 2);
+                                                    break label;
+                                                }
+                                                updateAttributes(board, hero);
+                                                Display.displayBoard(board);
+                                                Display.displayLegend(hero.getSymbol());
+                                                System.out.println("\u001B[42m " + hero.getSymbol() + ", You have moved \u001b[0m");
+                                                Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                                break label;
+                                            }
+                                        }
+                                        break;
+                                    case "s": // Move down
+                                        if (!board.canMove(hero.getI() + 1, hero.getJ()) || board.getGrid()[hero.getI() + 1][hero.getJ()].getIsHeroSet() == true) {
+                                            System.out.println("Inaccessible! Please enter a valid choice....");
+                                        } else {
+                                            board.moveHero(hero.getI() + 1, hero.getJ(), hero);
                                             updateAttributes(board, hero);
                                             Display.displayBoard(board);
-                                            Display.displayLegend(hero.getSymbol());
-                                            System.out.println("\u001B[42m " + hero.getSymbol() + ", You have moved \u001b[0m");
+                                            Display.displayLegend(player.getSymbol());
+                                            System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                             Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                             break label;
                                         }
-                                    }
-                                    break;
-                                case "s": // Move down
-                                    if (!board.canMove(hero.getI() + 1, hero.getJ()) || board.getGrid()[hero.getI() + 1][hero.getJ()].getIsHeroSet() == true) {
-                                        System.out.println("Inaccessible! Please enter a valid choice....");
-                                    } else {
-                                        board.moveHero(hero.getI() + 1, hero.getJ(), hero);
+                                        break;
+                                    case "a": // Move left
+                                        if (!board.canMove(hero.getI(), hero.getJ() - 1) || board.getGrid()[hero.getI()][hero.getJ() - 1].getIsHeroSet() == true) {
+                                            System.out.println("Inaccessible! Please enter a valid choice....");
+                                        } else {
+                                            board.moveHero(hero.getI(), hero.getJ() - 1, hero);
+                                            updateAttributes(board, hero);
+                                            Display.displayBoard(board);
+                                            Display.displayLegend(player.getSymbol());
+                                            System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
+                                            Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                            break label;
+                                        }
+                                        break;
+                                    case "d": // Move right
+                                        if (!board.canMove(hero.getI(), hero.getJ() + 1) || board.getGrid()[hero.getI()][hero.getJ() + 1].getIsHeroSet() == true) {
+                                            System.out.println("Inaccessible! Please enter a valid choice....");
+                                        } else {
+                                            board.moveHero(hero.getI(), hero.getJ() + 1, hero);
+                                            updateAttributes(board, hero);
+                                            Display.displayBoard(board);
+                                            Display.displayLegend(player.getSymbol());
+                                            System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
+                                            Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                            break label;
+                                        }
+                                        break;
+                                    case "b": // Go back to nexus
+                                        board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
                                         updateAttributes(board, hero);
                                         Display.displayBoard(board);
                                         Display.displayLegend(player.getSymbol());
                                         System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                         break label;
-                                    }
-                                    break;
-                                case "a": // Move left
-                                    if (!board.canMove(hero.getI(), hero.getJ() - 1) || board.getGrid()[hero.getI()][hero.getJ() - 1].getIsHeroSet() == true) {
-                                        System.out.println("Inaccessible! Please enter a valid choice....");
-                                    } else {
-                                        board.moveHero(hero.getI(), hero.getJ() - 1, hero);
-                                        updateAttributes(board, hero);
+                                    case "t":
+                                        teleport(hero, board);
+                                        break label;
+                                    case "e": // Show inventory of all heroes
+                                        System.out.println("\u001B[36m " + hero.getSymbol() + " Inventory \u001b[0m");
+                                        hero.showInventory();
+                                        System.out.println();
+                                        break;
+                                    case "i":
+                                        // Show info of all heroes
+                                        Display.displayHeroes(player.getHeroes());
+                                        break;
+                                    case "m":
+                                        // Display board
                                         Display.displayBoard(board);
                                         Display.displayLegend(player.getSymbol());
-                                        System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
-                                        Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
-                                        break label;
-                                    }
-                                    break;
-                                case "d": // Move right
-                                    if (!board.canMove(hero.getI(), hero.getJ() + 1) || board.getGrid()[hero.getI()][hero.getJ() + 1].getIsHeroSet() == true) {
-                                        System.out.println("Inaccessible! Please enter a valid choice....");
-                                    } else {
-                                        board.moveHero(hero.getI(), hero.getJ() + 1, hero);
+                                        break;
+                                    case "f":
+                                        System.out.println("Fight begins!");
                                         updateAttributes(board, hero);
                                         Display.displayBoard(board);
-                                        Display.displayLegend(player.getSymbol());
-                                        System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
-                                        Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
-                                        break label;
-                                    }
-                                    break;
-                                case "b": // Go back to nexus
-                                    board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
-                                    updateAttributes(board, hero);
-                                    Display.displayBoard(board);
-                                    Display.displayLegend(player.getSymbol());
-                                    System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
-                                    Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
-                                    break label;
-                                case "t":
-                                    teleport(hero, board);
-                                    break label;
-                                case "e": // Show inventory of all heroes
-                                    System.out.println("\u001B[36m " + hero.getSymbol() + " Inventory \u001b[0m");
-                                    hero.showInventory();
-                                    System.out.println();
-                                    break;
-                                case "i":
-                                    // Show info of all heroes
-                                    Display.displayHeroes(player.getHeroes());
-                                    break;
-                                case "m":
-                                    // Display board
-                                    Display.displayBoard(board);
-                                    Display.displayLegend(player.getSymbol());
-                                    break;
-                                case "f":
-                                    System.out.println("Fight begins!");
-                                    updateAttributes(board, hero);
-                                    Display.displayBoard(board);
-                                    List<Monsters> nearMonsters = hero.getNearByMonsters(board);
-                                    Random rand = new Random();
-                                    int randInt = rand.nextInt(nearMonsters.size());
-                                    Monsters curMonster = nearMonsters.get(randInt);
+                                        try {
+                                            List<Monsters> nearMonsters = hero.getNearByMonsters(board);
+                                            Random rand = new Random();
+                                            int randInt = rand.nextInt(nearMonsters.size());
+                                            Monsters curMonster = nearMonsters.get(randInt);
 //                                Monsters curMonster;
-                                    int fchoice = hero.fight(curMonster, market);
-                                    if (fchoice == 1)
-                                        return;
-                                    System.out.println("Monsters info");
-                                    Display.displayMonsters(player.getCurMonsters());
-                                    if (curMonster.getHp() <= 0) {
-                                        System.out.println(hero.getName() + " You have won the fight!");
-                                        board.moveMonster(0, monster.getJ(), monster);
-                                        Parser.parseMusic("mixkit-achievement-bell-600.wav");
-                                        curMonster.setHp(curMonster.getLevel() * 100);
-                                        hero.setStarting_money(hero.getStarting_money() + curMonster.getLevel() * 100);
-                                        hero.setStarting_exp(hero.getStarting_exp() + 2);
-                                        hero.setExp(hero.getExp() + 2);
-                                        if(hero.getExp() >= (hero.getLevel() * 10)){
-                                            System.out.println(hero.getSymbol() + " Leveled up!");
-                                            hero.levelUp();
-                                            Display.displayHeroes(player.getHeroes());
-                                            while (true) { // Avoiding repetition of monsters
-                                                Monsters newMonster = player.getMonster(hero);
-                                                if (player.getCurMonsters().contains(newMonster)) {
-                                                    continue;
-                                                }
-                                                else {
-                                                    player.getCurMonsters().set(i, newMonster);
-                                                    break;
+                                            int fchoice = hero.fight(curMonster, market);
+                                            if (fchoice == 1)
+                                                return;
+                                            System.out.println("Monsters info");
+                                            Display.displayMonsters(player.getCurMonsters());
+
+                                            if (curMonster.getHp() <= 0) {
+                                                System.out.println("\u001B[32m " + hero.getSymbol() + " You have won the fight! \u001B[0m");
+                                                board.moveMonster(0, curMonster.getJ(), curMonster);
+                                                Parser.parseMusic("mixkit-achievement-bell-600.wav");
+                                                curMonster.setHp(curMonster.getLevel() * 100);
+                                                hero.setStarting_money(hero.getStarting_money() + curMonster.getLevel() * 100);
+                                                hero.setStarting_exp(hero.getStarting_exp() + 2);
+                                                hero.setExp(hero.getExp() + 2);
+                                                if (hero.getExp() >= (hero.getLevel() * 10)) {
+                                                    System.out.println(hero.getSymbol() + " Leveled up!");
+                                                    hero.levelUp();
+                                                    Display.displayHeroes(player.getHeroes());
+                                                    while (true) { // Avoiding repetition of monsters
+                                                        Monsters newMonster = player.getMonster(hero);
+                                                        if (player.getCurMonsters().contains(newMonster)) {
+                                                            continue;
+                                                        } else {
+                                                            player.getCurMonsters().set(i, newMonster);
+                                                            break;
+                                                        }
+                                                    }
                                                 }
                                             }
+                                        } catch (Exception e) {
+                                            System.out.println("Please enter a valid choice");
+                                            break;
                                         }
-                                    }
 
-                                    break label;
-                                case "q":
-                                    // Quit the game
-                                    System.out.println("Thanks for playing");
-                                    return;
+                                        break label;
+                                    case "q":
+                                        // Quit the game
+                                        System.out.println("Thanks for playing");
+                                        return;
+                                }
                             }
-                        }
-                    } while (true);
+                        } while (true);
+                        if (newGameFlag == 1 || newGameFlag == 2)
+                            break;
 //            }
-                    if (hero.getI() == 0) {
-                        System.out.println("Heroes won the game");
-                        newGameFlag = GameFunctions.safeScanIntWithLimit(new Scanner(System.in), "Do you want to play another game?\n1. Yes\n2. No", 1, 2);
-                        Parser.parseMusic("mixkit-ethereal-fairy-win-sound-2019.wav");
-                        break;
-                    }
+
 //            for(Monsters monster: player.getCurMonsters()){
-                    // check if needed to attack heroes before move down
-                    if (monster.isHeroNearby(board)) {
-                        // get all nearby heroes and choose a random one to attack
-                        List<Heroes> nearHeroes = monster.getNearByHeroes(board);
-                        Random rand = new Random();
-                        int randInt = rand.nextInt(nearHeroes.size());
-                        Heroes curHero = nearHeroes.get(randInt);
-                        monster.attackHero(curHero);
-                        if (hero.getHp() <= 0) {
-                            hero.setHp((hero.getLevel() * 100) / 2);
-                            board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
-                            Display.displayBoard(board);
-                            Display.displayLegend(player.getSymbol());
-                            System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved back to nexus \u001b[0m");
-                            Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
-                        }
-                    } else {
-                        if (!board.canMove(monster.getI() + 1, monster.getJ())) {
-                            System.out.println("Inaccessible! Please enter a valid choice....");
+                        // check if needed to attack heroes before move down
+                        if (monster.isHeroNearby(board)) {
+                            // get all nearby heroes and choose a random one to attack
+                            List<Heroes> nearHeroes = monster.getNearByHeroes(board);
+                            Random rand = new Random();
+                            int randInt = rand.nextInt(nearHeroes.size());
+                            Heroes curHero = nearHeroes.get(randInt);
+                            monster.attackHero(curHero);
+                            if (hero.getHp() <= 0) {
+                                hero.setHp((hero.getLevel() * 100) / 2);
+                                board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
+                                Display.displayBoard(board);
+                                Display.displayLegend(player.getSymbol());
+                                System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved back to nexus \u001b[0m");
+                                Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                            }
                         } else {
-                            board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
-                            Display.displayBoard(board);
-                            Display.displayLegend(player.getSymbol());
+                            if (!board.canMove(monster.getI() + 1, monster.getJ())) {
+                                System.out.println("Inaccessible! Please enter a valid choice....");
+                            } else {
+                                board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
+                                Display.displayBoard(board);
+                                Display.displayLegend(player.getSymbol());
 //                    System.out.println("\u001B[42m " + monster.getName() + "You have moved \u001b[0m");
-                            Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                                Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
+                            }
+                            System.out.println("\u001B[42m " + monster.getSymbol() + ", you have moved \u001b[0m");
                         }
-                        System.out.println("\u001B[42m " + monster.getSymbol() + " have moved \u001b[0m");
+                        if (monster.getI() == GameConstants.boardSize - 1) {
+                            System.out.println("\u001B[31m Monsters won the game \u001B[0m");
+                            Parser.parseMusic("mixkit-ominous-drums-227.wav");
+                            newGameFlag = GameFunctions.safeScanIntWithLimit(new Scanner(System.in), "Do you want to play another game?\n1. Yes\n2. No\n", 1, 2);
+                            break;
+                        }
                     }
-                    if (monster.getI() == GameConstants.boardSize - 1) {
-                        System.out.println("Monsters won the game");
-                        newGameFlag = GameFunctions.safeScanIntWithLimit(new Scanner(System.in), "Do you want to play another game?\n1. Yes\n2. No\n", 1, 2);
-                        Parser.parseMusic("mixkit-ominous-drums-227.wav");
+                    if (newGameFlag == 1 || newGameFlag == 2)
                         break;
-                    }
                 }
-                if(newGameFlag == 1 || newGameFlag == 2)
-                    break;
+                if (newGameFlag == 2)
+                    return;
+                else {
+                    if (GameFunctions.safeScanIntWithLimit(new Scanner(System.in), "1. Continue this game\n2. Start a new game\n", 1, 2) == 1)
+                        newGameFlag = 0;
+                    else
+                        break;
+                }
             }
-            if(newGameFlag == 2)
-                return;
         }
     }
 }
