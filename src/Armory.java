@@ -18,7 +18,7 @@ public class Armory extends MarketItems implements isUsable, isBuyableSellable{
     public static List<String> getAllLines() {
         return allLines;
     }
-
+    // Setters and getters for all the armory attributes
     public String getEquip() {
         return equip;
     }
@@ -71,6 +71,7 @@ public class Armory extends MarketItems implements isUsable, isBuyableSellable{
         return "Armory";
     }
 
+    // Overriding equals method for comparison
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,6 +87,7 @@ public class Armory extends MarketItems implements isUsable, isBuyableSellable{
 
     @Override
     public void display(){
+        // Calls the displayArmory method for displaying the list of armories
         Display.displayArmory(armories);
     }
 
@@ -109,21 +111,17 @@ public class Armory extends MarketItems implements isUsable, isBuyableSellable{
 
     public List<String> getList() {
         // Returns the list of armories
-        allLines = Parser.parser("Armory.txt");
-        List<String> list = new ArrayList<>();
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("Armory.txt"); // Parses the Armory.txt config file
+        return this.getItemList(allLines); // Returns the list of items from the parsed config file
     }
 
     public void buy(Market market, Heroes hero, int id){
-        Armory item = market.getArmory().armories.get(id);
-        item.setEquip("Yes");
-        hero.getArmories().add(item);
-        hero.setIsEquipped(true);
-        hero.setCurArmory(item);
+        // method to buy the armory
+        Armory item = market.getArmory().armories.get(id); // Getting the selected armory object
+        item.setEquip("Yes"); // Equipping the armory
+        hero.getArmories().add(item); // Adding the item to hero's inventory
+        hero.setIsEquipped(true); // Setting isEquipped to true
+        hero.setCurArmory(item); // Setting this item as hero's current armory
     }
 
 }

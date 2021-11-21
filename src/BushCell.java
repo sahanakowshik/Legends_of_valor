@@ -1,5 +1,6 @@
 public class BushCell extends Cell implements isAccessible{
-//    private String symbol = "\u001b[34m  B  \u001b[0m";
+    // Holds attributes to create a Bush cell
+
     private String symbol = "       ";
     @Override
     public String getSymbol() {

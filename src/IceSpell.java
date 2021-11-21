@@ -17,6 +17,7 @@ public class IceSpell extends Spell{
 
     @Override
     public void display(){
+        // Calls the displaySpells method for displaying the list of ice spells
         Display.displaySpells(iceSpells);
     }
 
@@ -35,17 +36,13 @@ public class IceSpell extends Spell{
 
     public List<String> getList() {
         // Returns a list of ice spells
-        allLines = Parser.parser("IceSpells.txt");
-        List<String> list = new ArrayList<>();
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("IceSpells.txt"); // Parses the IceSpells.txt config file
+        return this.getItemList(allLines); // Returns the list of items from the parsed config file
     }
 
     @Override
     public void buy(Market market, Heroes hero, int id) {
+        // method to buy the ice spell
         hero.getSpells().add(market.getIceSpell().iceSpells.get(id));
     }
 }

@@ -12,6 +12,7 @@ public abstract class Spell extends MarketItems implements isCastable, isBuyable
     private int mana_cost;
     public static List<String> allLines;
 
+    // Overriding equals method for comparison
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -25,6 +26,7 @@ public abstract class Spell extends MarketItems implements isCastable, isBuyable
         return Objects.hash(id, Name, cost, req_level, damage, mana_cost);
     }
 
+    // // Getters and setters for all the spell attributes
     public int getId() {
         return id;
     }
@@ -74,6 +76,7 @@ public abstract class Spell extends MarketItems implements isCastable, isBuyable
     }
 
     public void createSpell(Spell spell, String[] words){
+        // Creates a spell
         spell.setId(Integer.parseInt(words[0]));
         spell.setName(words[1]);
         spell.setCost(Integer.parseInt(words[2]));

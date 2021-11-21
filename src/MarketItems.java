@@ -13,6 +13,16 @@ public abstract class MarketItems{
     protected List<Spell> iceSpells;
     protected List<Spell> lightningSpells;
 
+    public List<String> getItemList(List<String> allLines){
+        // creates a list of items from allLines (allLines contains strings from parsed config files)
+        List<String> list = new ArrayList<>();
+        for (int i=1;i<allLines.size();i++) {
+            String str = i + "   " + allLines.get(i);
+            list.add(str);
+        }
+        return list;
+    }
+
     public abstract void display();
 
     public abstract void createList();

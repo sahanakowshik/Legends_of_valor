@@ -17,6 +17,7 @@ public class FireSpell extends Spell{
 
     @Override
     public void display(){
+        // Calls the displaySpells method for displaying the list of fire spells
         Display.displaySpells(fireSpells);
     }
 
@@ -35,17 +36,13 @@ public class FireSpell extends Spell{
 
     public List<String> getList() {
         // Returns a list of fire spells
-        allLines = Parser.parser("FireSpells.txt");
-        List<String> list = new ArrayList<>();
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("FireSpells.txt"); // Parses the FireSpells.txt config file
+        return this.getItemList(allLines); // Returns the list of items from the parsed config file
     }
 
     @Override
     public void buy(Market market, Heroes hero, int id) {
+        // method to buy the fire spell
         hero.getSpells().add(market.getFireSpell().fireSpells.get(id));
     }
 }

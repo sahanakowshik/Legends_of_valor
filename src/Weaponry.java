@@ -20,6 +20,7 @@ public class Weaponry extends MarketItems implements isBuyableSellable, isUsable
         return allLines;
     }
 
+    // Setters and getters for all the weapon attributes
     public String getEquip() {
         return equip;
     }
@@ -76,6 +77,7 @@ public class Weaponry extends MarketItems implements isBuyableSellable, isUsable
         this.req_hands = req_hands;
     }
 
+    // Overriding equals method for comparison
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,13 +91,14 @@ public class Weaponry extends MarketItems implements isBuyableSellable, isUsable
         return Objects.hash(id, Name, cost, level, damage, equip, req_hands);
     }
 
-    //    @Override
+
     public String getType() {
         return "Weaponry";
     }
 
     @Override
     public void display(){
+        // Calls the displayWeaponry method for displaying the list of weapons
         Display.displayWeaponry(weapons);
     }
 
@@ -120,22 +123,18 @@ public class Weaponry extends MarketItems implements isBuyableSellable, isUsable
 
     public List<String> getList() {
         // Returns a list of weapons
-        allLines = Parser.parser("Weaponry.txt");
-        List<String> list = new ArrayList<>();
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("Weaponry.txt"); // Parses the Weaponry.txt config file
+        return this.getItemList(allLines); // Returns the list of items from the parsed config file
     }
 
     @Override
     public void buy(Market market, Heroes hero, int id) {
-        Weaponry item = market.getWeaponry().weapons.get(id);
-        item.setEquip("Yes");
-        hero.getWeapons().add(item);
-        hero.setIsEquipped(true);
-        hero.setCurWeapon(item);
+        // method to buy the weapon
+        Weaponry item = market.getWeaponry().weapons.get(id); // Getting the selected weapon object
+        item.setEquip("Yes"); // Equipping the weapon
+        hero.getWeapons().add(item); // Adding the item to hero's inventory
+        hero.setIsEquipped(true); // Setting isEquipped to true
+        hero.setCurWeapon(item); // Setting this item as hero's current weapon
     }
 
 }

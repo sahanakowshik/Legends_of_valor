@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LightningSpell extends Spell{
-//    public static List<String> allLines;
+    // Class to create a list of lightning spells
 
     public static List<String> getAllLines() {
         return allLines;
@@ -17,6 +17,7 @@ public class LightningSpell extends Spell{
 
     @Override
     public void display(){
+        // Calls the displaySpells method for displaying the list of lightning spells
         Display.displaySpells(lightningSpells);
     }
 
@@ -35,17 +36,13 @@ public class LightningSpell extends Spell{
 
     public List<String> getList() {
         // Returns a list of lightning spells
-        allLines = Parser.parser("LightningSpells.txt");
-        List<String> list = new ArrayList<>();
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("LightningSpells.txt"); // Parses the LightningSpells.txt config file
+        return this.getItemList(allLines); // Returns the list of items from the parsed config file
     }
 
     @Override
     public void buy(Market market, Heroes hero, int id) {
+        // method to buy the lightning spell
         hero.getSpells().add(market.getLightningSpell().lightningSpells.get(id));
     }
 }

@@ -1,5 +1,6 @@
 public class KoulouCell extends Cell implements isAccessible{
-//    private String symbol = "\u001b[34m  K  \u001b[0m";
+    // Holds attributes to create a Koulou cell
+
     private String symbol = "       ";
     @Override
     public String getSymbol() {

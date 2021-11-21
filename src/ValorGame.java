@@ -4,11 +4,10 @@ public class ValorGame extends RpgGame{
     ValorPlayer player;
     private Market market;
     private int newGameFlag;
-    private int exp;
 
     @Override
     public String getName() {
-        return null;
+        return "Legends of Valor";
     }
 
     public void updateAttributes(ValorBoard board, Heroes hero){
@@ -172,7 +171,7 @@ public class ValorGame extends RpgGame{
                 break;
         }
         Display.displayBoard(board);
-        Display.displayLegend(player.getSymbol());
+        Display.displayLegend(hero.getSymbol());
         System.out.println("\u001B[42m " + hero.getSymbol() + "You have teleported \u001b[0m");
         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
     }
@@ -264,7 +263,7 @@ public class ValorGame extends RpgGame{
                                             board.moveHero(hero.getI() + 1, hero.getJ(), hero);
                                             updateAttributes(board, hero);
                                             Display.displayBoard(board);
-                                            Display.displayLegend(player.getSymbol());
+                                            Display.displayLegend(hero.getSymbol());
                                             System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                             Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                             break label;
@@ -277,7 +276,7 @@ public class ValorGame extends RpgGame{
                                             board.moveHero(hero.getI(), hero.getJ() - 1, hero);
                                             updateAttributes(board, hero);
                                             Display.displayBoard(board);
-                                            Display.displayLegend(player.getSymbol());
+                                            Display.displayLegend(hero.getSymbol());
                                             System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                             Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                             break label;
@@ -290,7 +289,7 @@ public class ValorGame extends RpgGame{
                                             board.moveHero(hero.getI(), hero.getJ() + 1, hero);
                                             updateAttributes(board, hero);
                                             Display.displayBoard(board);
-                                            Display.displayLegend(player.getSymbol());
+                                            Display.displayLegend(hero.getSymbol());
                                             System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                             Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                             break label;
@@ -300,7 +299,7 @@ public class ValorGame extends RpgGame{
                                         board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
                                         updateAttributes(board, hero);
                                         Display.displayBoard(board);
-                                        Display.displayLegend(player.getSymbol());
+                                        Display.displayLegend(hero.getSymbol());
                                         System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved \u001b[0m");
                                         Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                                         break label;
@@ -319,7 +318,7 @@ public class ValorGame extends RpgGame{
                                     case "m":
                                         // Display board
                                         Display.displayBoard(board);
-                                        Display.displayLegend(player.getSymbol());
+                                        Display.displayLegend(hero.getSymbol());
                                         break;
                                     case "f":
                                         System.out.println("Fight begins!");
@@ -346,7 +345,7 @@ public class ValorGame extends RpgGame{
                                                 hero.setStarting_exp(hero.getStarting_exp() + 2);
                                                 hero.setExp(hero.getExp() + 2);
                                                 if (hero.getExp() >= (hero.getLevel() * 10)) {
-                                                    System.out.println(hero.getSymbol() + " Leveled up!");
+                                                    System.out.println("\u001B[44m " + hero.getSymbol() + " Leveled up! \u001B[0m");
                                                     hero.levelUp();
                                                     Display.displayHeroes(player.getHeroes());
                                                     while (true) { // Avoiding repetition of monsters
@@ -390,7 +389,7 @@ public class ValorGame extends RpgGame{
                                 hero.setHp((hero.getLevel() * 100) / 2);
                                 board.moveHero(board.getBoardSize() - 1, hero.getJ(), hero);
                                 Display.displayBoard(board);
-                                Display.displayLegend(player.getSymbol());
+                                Display.displayLegend(hero.getSymbol());
                                 System.out.println("\u001B[42m " + hero.getSymbol() + "You have moved back to nexus \u001b[0m");
                                 Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                             }
@@ -400,7 +399,7 @@ public class ValorGame extends RpgGame{
                             } else {
                                 board.moveMonster(monster.getI() + 1, monster.getJ(), monster);
                                 Display.displayBoard(board);
-                                Display.displayLegend(player.getSymbol());
+                                Display.displayLegend(hero.getSymbol());
                                 Parser.parseMusic("mixkit-player-jumping-in-a-video-game-2043.wav");
                             }
                             System.out.println("\u001B[42m " + monster.getSymbol() + ", you have moved \u001b[0m");

@@ -96,10 +96,10 @@ public class Display {
     public static void displayLegend(String symbol){
         // Displays the legend
         System.out.println("---------Legend---------");
-        System.out.println("M       = Market");
+        System.out.println("N       = Nexus");
         System.out.println("I       = Blocked space");
-        System.out.println("<Blank> = Common space");
-        System.out.println(symbol + "       = Current player");
+        System.out.println("<Blank> = Accessible space");
+//        System.out.println(symbol + "       = Current player");
     }
 
     public static void displayArmory(List<Armory> armories){
