@@ -1,4 +1,10 @@
 -----
+***Name: Adam Curley***<br />
+***BUID: U63497650***
+
+***Name: Lei Huang***<br />
+***BUID: U67278956***
+
 ***Name: Sahana Subramanya Kowshik***<br />
 ***BUID: U43929102***
 
