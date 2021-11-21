@@ -50,6 +50,7 @@ public class ValorPlayer extends Player{
     }
 
     public Monsters getMonster(Heroes hero){
+        // returns a monster of the hero's level
         Random rand = new Random();
         Monsters monster = monsters.get(hero.getLevel()).get(rand.nextInt(monsters.get(hero.getLevel()).size()));
         return monster;

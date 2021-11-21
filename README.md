@@ -7,9 +7,9 @@
 ***Classes***
 1. Main: The main class that calls startGame of LegendsGame class.
 2. RPGGame: An abstract class that stores common attributes to all role-playing games.
-3. LegendsGame: Implements main logic for the "Legends: Monsters and Heroes" game. Contains methods to start the game, create monsters, and fight.
+3. ValorGame: Implements main logic for the "Legends of Valor" game. Contains methods to start the game, create monsters, and fight.
 4. Player: An abstract class stores attributes and functions common to all players.
-5. LegendsPlayer: Class to create players.
+5. ValorPlayer: Class to create players.
 6. Heroes: An abstract class that stores common attributes and functions to all heroes.
 7. Warrior: Class to create an instance of a warrior.
 8. Sorcerer: Class to create an instance of a sorcerer.
@@ -20,20 +20,23 @@
 13. Spirit: Class to create an instance of a spirit.
 14. Cell: An abstract class that holds attributes to create a cell.
 15. CellFactory: Used to implement the factory pattern to create a map using cells.
-16. SafeCell: Class to create a safe/common cell.
-17. MarketCell: Class to create a market cell.
+16. PlainCell: Class to create a plain cell.
+17. NexusCell: Class to create a nexus cell.
 18. InaccessibleCell: Class to create an inaccessible cell.
-19. Board: An abstract class that holds attributes and functions common to all RPG games.
-20. LegendsBoard: Class to create a map/board. Contains methods to create boards, add players and move them.
-21. Market: Class to create a market. Has methods to create and display all market items, and buy/sell items.
-22. MarketItems: An abstract class that holds common attributes to all items.
-23. Armory: Class to create armories.
-24. Weaponry: Class to create weapons.
-25. Potions: Class to create potions.
-26. Spell: An abstract class that holds common attributes to all spells.
-27. FireSpell: Class to create a fire spell.
-28. IceSpell: Class to create an ice spell.
-29. LightningSpell: Class to create a lightning spell.
+19. CaveCell: Class to create a cave cell.
+20. BushCell: Class to create a bush cell.
+21. KoulouCell: Class to create a koulou cell.
+22. Board: An abstract class that holds attributes and functions common to all RPG games.
+23. ValorBoard: Class to create a map/board. Contains methods to create boards, add players and move them.
+24. Market: Class to create a market. Has methods to create and display all market items, and buy/sell items.
+25. MarketItems: An abstract class that holds common attributes to all items.
+26. Armory: Class to create armories.
+27. Weaponry: Class to create weapons.
+28. Potions: Class to create potions.
+29. Spell: An abstract class that holds common attributes to all spells.
+30. FireSpell: Class to create a fire spell.
+31. IceSpell: Class to create an ice spell.
+32. LightningSpell: Class to create a lightning spell.
 
 ***Interfaces***
 1. Game: Stores common attributes to all games.
@@ -53,14 +56,13 @@
 6. Display: Used to display map/board, heroes, monsters, legend, and list of armories, weapons, potions, and spells.
 
 ***Assumptions***
-1. If all players die, they get revived with half their health.
-2. A player is assumed to be able to hold one weapon and one armor at a time.
-3. A player can hold any number of potions or spells of the same level.
-4. After the fight, all surviving heroes get coins equal to monter with the highest level * 100.
-5. 
+1. If a hero dies, he gets respawned at the nexus with half his health.
+2. A hero is assumed to be able to hold one weapon and one armor at a time.
+3. A hero can hold any number of potions or spells of the same level.
+4. After the fight, the hero gets coins equal to monster's level * 100.
 
 ***Design Patterns***
-1. Factory Pattern: Factory pattern is implemented in the LegendsBoard class to create cells of type market, safe/common and inaccessible using CellFactory class.
+1. Factory Pattern: Factory pattern is implemented in the ValorBoard class to create cells of type nexus, plain, cave, bush, koulou and inaccessible using CellFactory class.
 2. Facade Pattern: Facade pattern is implemented to create the market. The main intention to use the facade pattern here is to allow the creation of market items only using the market object. This is achieved using MarketInterface.
 
 ***Bonus Features***
@@ -69,6 +71,7 @@
 3. Added color to the text
 4. Added sound to the game
 5. Implemented a parser class to parse the config files
+6. Implemented level up
 
 **Compile and run**<br />
 *Extract the zip file into a folder.
@@ -79,20 +82,21 @@ All the below commands are run in the extracted directory*
 
 ***How to Play***
 1. Compile and run using the instructions mentioned above.
-2. Enter player name, number of heroes, and player symbol.
+2. Enter player name.
 3. Build the team by selecting the hero classes and the Id of the heroes.
 4. Use the map and the location to move around. 
-   1. Move(W/A/S/D)
-   2. Check player Info(I)
-   3. Check weapons Inventory (E)
-   4. Show map (M)
-   5. Quit (Q)
-5. Items can be bought and sold in a market.
-6. Monsters can be fought using a weapon or casting a spell.
+   1. Move (W/A/S/D)
+   2. BackToNexus (B)
+   3. Teleport (T)
+   4. Check player Info (I)
+   5. Check weapons Inventory (E)
+   6. Show map (M)
+   7. Quit (Q)
+6. Items can be bought and sold in a Nexus cell.
+7. Monsters can be fought using a weapon or casting a spell.
 
 
 ***Note:***
 1. The code only works with compile and run steps specified due to the path given to parse the config and music files. Does not run with Intellij or Eclipse.
 2. Config files are present in the Legends_Monsters_and_Heroes folder. 
-3. The grid is currently played for 8X8. This can be changed in GameConstants file.
 4. There are 13 music files for sound at different stages.

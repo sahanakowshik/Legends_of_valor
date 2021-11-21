@@ -480,6 +480,17 @@ public abstract class Heroes extends ValorPlayer{
         return 0;
     }
 
+    public void displayItemList(List<String> allLines){
+        // Displays the heroes list
+        String[] words = allLines.get(0).split("/");
+        String line = String.join("   ", words);
+        System.out.println("Id   " +line);
+        for (int i=1;i<allLines.size();i++) {
+            System.out.print(i + "   ");
+            System.out.println(allLines.get(i));
+        }
+    }
+
     public abstract int getN();
 
     public abstract String getType();

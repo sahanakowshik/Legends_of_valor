@@ -35,10 +35,6 @@ public abstract class Monsters extends ValorPlayer{
         this.hp = hp;
     }
 
-//    public Map<Integer,List<String>> monsters=new HashMap<Integer,List<String>>();
-    // Combine monsters level wise and make list
-    // add method to get n monsters at random
-
     @Override
     public String getName() {
         return name;
@@ -82,7 +78,7 @@ public abstract class Monsters extends ValorPlayer{
     }
 
     public void displayMonster(int i){
-        System.out.format("%d   %15s    %10d     %d    %d     %d%n", i+1, this.getName(), this.getLevel(), this.getHp(), this.getDamage(), this.getDefense(), this.getDodge_chance());
+        System.out.format("%d   %15s    %10d     %d    %d     %d     %d%n", i+1, this.getName(), this.getLevel(), this.getHp(), this.getDamage(), this.getDefense(), this.getDodge_chance());
     }
     public abstract int getN();
 
@@ -120,6 +116,7 @@ public abstract class Monsters extends ValorPlayer{
     }
 
     public void attackHero(Heroes hero) {
+        // Attacks the hero
         int monDmg = (int) (this.getDamage() * 0.05); // Calculating damage dealt by monster
         if (GameFunctions.getRandomBoolean((float) (hero.getAgility() * 0.001))) { // Checking if hero dodged the attack
             System.out.println("\u001B[32m " + hero.getName() + " have dodged the attack! \u001b[0m");
@@ -149,5 +146,15 @@ public abstract class Monsters extends ValorPlayer{
     @Override
     public int hashCode() {
         return Objects.hash(name, level, damage, defense, dodge_chance, hp);
+    }
+
+    public static List<String> getItemList(List<String> allLines){
+        // returns a list of string items
+        List<String> list = new ArrayList<>();
+        for (int i=1;i<allLines.size();i++) {
+            String str = i + "   " + allLines.get(i);
+            list.add(str);
+        }
+        return list;
     }
 }

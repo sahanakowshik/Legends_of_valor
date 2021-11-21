@@ -10,7 +10,7 @@ public class Parser {
 
     public static List<String> parser(String name){
         try {
-            String file = System.getProperty("user.dir") + "/src/Legends_Monsters_and_Heroes/" + name;
+            String file = System.getProperty("user.dir") + "/Legends_Monsters_and_Heroes/" + name;
             allLines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
@@ -19,7 +19,7 @@ public class Parser {
     }
 
     public static void parseMusic(String name){
-        String file = System.getProperty("user.dir") + "/src/music/" + name;
+        String file = System.getProperty("user.dir") + "/music/" + name;
         Music.playSound(file);
     }
 

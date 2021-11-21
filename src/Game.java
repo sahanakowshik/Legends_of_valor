@@ -1,12 +1,12 @@
 public interface Game {
     // Game interface
 
-    public String getName();
+    String getName();
 
 
     /**
      * Start the game
      */
-    public void startGame() throws Exception;
+    void startGame() throws Exception;
 
 }

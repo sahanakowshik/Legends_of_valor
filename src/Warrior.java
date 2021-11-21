@@ -13,7 +13,7 @@ public class Warrior extends Heroes{
     }
 
     public Warrior(){
-        allLines = Parser.parser("Warriors.txt");
+        allLines = Parser.parser("Warriors.txt"); // Parses the config file
         this.n = allLines.size();
     }
 
@@ -29,12 +29,6 @@ public class Warrior extends Heroes{
     @Override
     public void displayList() {
         // Displays the list of warriors
-        String[] words = allLines.get(0).split("/");
-        String line = String.join("   ", words);
-        System.out.println("Id   " + line);
-        for (int i=1;i<allLines.size();i++) {
-            System.out.print(i + "   ");
-            System.out.println(allLines.get(i));
-        }
+        this.displayItemList(allLines);
     }
 }

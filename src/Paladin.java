@@ -18,7 +18,7 @@ public class Paladin extends Heroes{
     }
 
     public Paladin(){
-        allLines = Parser.parser("Paladins.txt");
+        allLines = Parser.parser("Paladins.txt"); // Parses the config file
         this.n = allLines.size();
     }
 
@@ -34,12 +34,6 @@ public class Paladin extends Heroes{
     @Override
     public void displayList() {
         // Displays the list of paladins
-        String[] words = allLines.get(0).split("/");
-        String line = String.join("   ", words);
-        System.out.println("Id   " +line);
-        for (int i=1;i<allLines.size();i++) {
-            System.out.print(i + "   ");
-            System.out.println(allLines.get(i));
-        }
+        this.displayItemList(allLines);
     }
 }

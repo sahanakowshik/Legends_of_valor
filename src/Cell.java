@@ -1,9 +1,9 @@
 public abstract class Cell{
     // Class to hold attributes of a single cell in the map
-    private boolean isHeroSet;
-    private boolean isMonsterSet;
-    private Heroes hero;
-    private Monsters monster;
+    private boolean isHeroSet; // a flag to check if a hero is present in a cell
+    private boolean isMonsterSet; // a flag to check if a monster is present in a cell
+    private Heroes hero; // hero present in the current cell
+    private Monsters monster; // monster present in the current cell
 
     public boolean getIsHeroSet() {
         return isHeroSet;
@@ -21,7 +21,6 @@ public abstract class Cell{
         isMonsterSet = monsterSet;
     }
 
-
     public Monsters getMonster() {
         return monster;
     }
@@ -29,16 +28,6 @@ public abstract class Cell{
     public void setMonster(Monsters monster) {
         this.monster = monster;
     }
-
-//    protected String cell[][];
-
-//    public boolean getIsSet() {
-//        return isSet;
-//    }
-//
-//    public void setIsSet(boolean set) {
-//        isSet = set;
-//    }
 
     public Heroes getHero() {
         return hero;

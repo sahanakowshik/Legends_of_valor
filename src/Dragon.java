@@ -24,12 +24,7 @@ public class Dragon extends Monsters{
 
     public static List<String> getList() {
         // Returns a list of dragons
-        List<String> list = new ArrayList<>();
-        allLines = Parser.parser("Dragons.txt");
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("Dragons.txt"); // Parses the Dragons.txt file
+        return Monsters.getItemList(allLines); // Returns the list of dragons from the parsed file
     }
 }

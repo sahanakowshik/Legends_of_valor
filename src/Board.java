@@ -1,6 +1,6 @@
 public abstract class Board {
     // Class to create a board/map
-    private Cell[][] grid;
+    private Cell[][] grid; // creates an instance of the game board/grid
 
     public Cell[][] getGrid() {
         return grid;
@@ -15,17 +15,9 @@ public abstract class Board {
         return GameConstants.boardSize;
     }
 
-//    public void setBoardSize(int boardSize) {
-//        GameConstants.boardSize = boardSize;
-//    }
-
     public Board(){
         grid = new Cell[this.getBoardSize()][this.getBoardSize()];
     }
 
-//    public Board(int boardSize){
-//        setBoardSize(boardSize);
-//        board = new Cell[this.getBoardSize()][this.getBoardSize()];
-//    }
     public abstract void createBoard();
 }

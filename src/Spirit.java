@@ -15,13 +15,8 @@ public class Spirit extends Monsters{
 
     public static List<String> getList() {
         // Returns a list of spirits
-        List<String> list = new ArrayList<>();
-        allLines = Parser.parser("Spirits.txt");
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("Spirits.txt"); // Parses the Spirits.txt file
+        return Monsters.getItemList(allLines); // Returns the list of spirits from the parsed file
     }
 
     public int getN() {

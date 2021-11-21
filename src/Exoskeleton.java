@@ -16,13 +16,8 @@ public class Exoskeleton extends Monsters{
 
     public static List<String> getList() {
         // Returns a list of exoskeletons
-        List<String> list = new ArrayList<>();
-        allLines = Parser.parser("Exoskeletons.txt");
-        for (int i=1;i<allLines.size();i++) {
-            String str = i + "   " + allLines.get(i);
-            list.add(str);
-        }
-        return list;
+        allLines = Parser.parser("Exoskeletons.txt"); // Parses the Exoskeletons.txt file
+        return Monsters.getItemList(allLines); // Returns a list of exoskeletons from the parsed file
     }
 
     public int getN() {

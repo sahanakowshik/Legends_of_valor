@@ -1,6 +1,7 @@
 public class CellFactory {
     // Factory design pattern to create cells
     public static Cell getCell(String cellType){
+        // Returns a cell object based on the given cell type
         if(cellType == null){
             return null;
         }
@@ -18,8 +19,10 @@ public class CellFactory {
 
         }else if(cellType.equalsIgnoreCase("KOULOU")) {
             return new KoulouCell();
+
         }else if(cellType.equalsIgnoreCase("PLAIN")) {
             return new PlainCell();
+
         }
 
         return null;
