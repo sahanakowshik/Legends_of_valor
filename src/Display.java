@@ -15,6 +15,7 @@ public class Display {
             if (i != 0) {
                 System.out.println();
             }
+            // Design corresponding surroundings for different cells
             StringBuilder line = new StringBuilder();
             for(int j=0;j<GameConstants.boardSize;j++){
                 if (j != 0) {
@@ -36,7 +37,7 @@ public class Display {
             }
             System.out.println(line);
 
-            // print the content
+            // Print the content
             for(int j=0;j<GameConstants.boardSize;j++) {
                 String roleContent = "";
                 if (j != 0) {
@@ -72,7 +73,7 @@ public class Display {
             }
             System.out.println();
 
-            // print the bottom
+            // Print the bottom
             System.out.println(line);
         }
     }

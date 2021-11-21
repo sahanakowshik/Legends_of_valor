@@ -103,6 +103,7 @@ public abstract class Heroes extends ValorPlayer{
         exp = 0;
     }
 
+    // Get the isMonsterSet flag to figure out whether there is a monster in the adjacent cell
     public boolean isMonsterNearby(Board board) {
         if (board.getGrid()[i][j].getIsMonsterSet() || board.getGrid()[i-1][j].getIsMonsterSet()) {
             return true;
@@ -115,6 +116,7 @@ public abstract class Heroes extends ValorPlayer{
         return false;
     }
 
+    // Will return all the monsters nearby. In a List
     public List<Monsters> getNearByMonsters(Board board) {
         if (this.isMonsterNearby(board)) { // get all near heroes if there are
             List<Monsters> nearMonsters = new ArrayList<>();
