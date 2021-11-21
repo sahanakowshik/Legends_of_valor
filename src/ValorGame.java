@@ -26,6 +26,7 @@ public class ValorGame extends RpgGame{
     }
 
     public void teleport(Heroes hero, ValorBoard board){
+        // Gather the options for teleportation based on the hero's current lane
         String laneOptions = "";
         String[] laneData = new String[2];
         if (hero.getJ() == 0 || hero.getJ() == 1) {
@@ -43,12 +44,15 @@ public class ValorGame extends RpgGame{
             laneData[1] = "2";
             laneOptions = "1.Top Lane or 2.Mid Lane?: ";
         }
+        // Get the hero's target lane
         String laneChoice = GameFunctions.safeScanString(new Scanner(System.in), laneOptions);
         while (!Arrays.asList(laneData).contains(laneChoice)) {
             System.out.println("Please enter a valid choice....");
             laneChoice = GameFunctions.safeScanString(new Scanner(System.in), laneOptions);
         }
 
+        // check the hero's current row
+        // Set the target teleportation square to -1, -1 (ineligible) and monsterLocation to -1 (no monster)
         int rowCheck = hero.getI();
         int teleRow = -1;
         int teleCol = -1;
@@ -67,6 +71,7 @@ public class ValorGame extends RpgGame{
                     }
                 }
 
+                // If there is no monster, then the hero can teleport anywhere in the lane that they have traveled already
                 if (monsterLoc == -1) {
                     monsterLoc = rowCheck - 1;
                 }
@@ -86,6 +91,7 @@ public class ValorGame extends RpgGame{
                     }
                 }
 
+                // If teleRow and teleCol never change, then the hero is ineligible to teleport to that lane
                 if (teleRow == -1 && teleCol == -1) {
                     System.out.println("You cannot teleport!");
                 }
@@ -105,6 +111,7 @@ public class ValorGame extends RpgGame{
                     }
                 }
 
+                // If there is no monster, then the hero can teleport anywhere in the lane that they have traveled already
                 if (monsterLoc == -1) {
                     monsterLoc = rowCheck - 1;
                 }
@@ -124,6 +131,7 @@ public class ValorGame extends RpgGame{
                     }
                 }
 
+                // If teleRow and teleCol never change, then the hero is ineligible to teleport to that lane
                 if (teleRow == -1 && teleCol == -1) {
                     System.out.println("You cannot teleport!");
                 }
@@ -143,6 +151,7 @@ public class ValorGame extends RpgGame{
                     }
                 }
 
+                // If there is no monster, then the hero can teleport anywhere in the lane that they have traveled already
                 if (monsterLoc == -1) {
                     monsterLoc = rowCheck - 1;
                 }
@@ -162,6 +171,7 @@ public class ValorGame extends RpgGame{
                     }
                 }
 
+                 // If teleRow and teleCol never change, then the hero is ineligible to teleport to that lane
                 if (teleRow == -1 && teleCol == -1) {
                     System.out.println("You cannot teleport!");
                 }
