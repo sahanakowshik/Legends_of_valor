@@ -78,6 +78,7 @@
 4. Added sound to the game
 5. Implemented a parser class to parse the config files
 6. Implemented level up
+7. A different game board is generated in every game. Apart from nexus and inaccessible cells, other cells (bush, cave and koulou cell) are added with 0.2 probability.
 
 **Compile and run**<br />
 *Extract the zip file into a folder.
